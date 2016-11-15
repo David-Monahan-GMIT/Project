@@ -1,10 +1,9 @@
-
+import org.alicebot.ab.*;
 public class HelloWorld {
 
 	public static void main(String[] args) {
-		System.out.println(helloWorld());
+		Bot bot = new Bot("Alice");
+		Chat chatSession = new Chat(bot);
 	}
-	public static String helloWorld() {
-		return "Hello World."; 
-	}
+
 }
