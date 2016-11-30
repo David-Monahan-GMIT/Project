@@ -44,7 +44,7 @@ public class Main {
 	private static final Logger log = LoggerFactory.getLogger(Main.class);
     public static void main (String[] args) {
         MagicStrings.root_path = System.getProperty("user.dir");
-        log.info("Working Directory = " + MagicStrings.root_path);
+        log.info("Working Directory = " + MagicStrings.root_path + "/../ab/");
         AIMLProcessor.extension =  new PCAIMLProcessorExtension();
         mainFunction(args);
     }
@@ -67,7 +67,7 @@ public class Main {
         log.info("trace mode = "+MagicBooleans.trace_mode);
         Graphmaster.enableShortCuts = true;
         Timer timer = new Timer();
-        Bot bot = new Bot(botName, MagicStrings.root_path, action); //
+        Bot bot = new Bot(botName, MagicStrings.root_path+"/../ab/", action); //
         //bot.preProcessor.normalizeFile("c:/ab/log1.txt", "c:/ab/data/lognormal.txt");
         if (bot.brain.getCategories().size() < 100) bot.brain.printgraph();
         if (action.equals("chat")) testChat(bot, MagicBooleans.trace_mode);
