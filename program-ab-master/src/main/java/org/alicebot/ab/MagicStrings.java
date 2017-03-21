@@ -33,7 +33,8 @@ public class MagicStrings {
     public static String aimlif_file_suffix = ".csv";
     public static String ab_sample_file = "sample.txt";
     // <sraix> defaults
-    public static String pannous_api_key = "guest";
+    // possible key SRlu5NaRipmshqldFD3ULRl70t99p1W55D0jsnbJqUxIL1TRek // "guest"
+    public static String pannous_api_key = "dG6NYxGf8lmshZSsiMZAPsV3VjTXp1tnTW2jsnjPnHxQ2YlThr";
     public static String pannous_login = "test-user";
     public static String sraix_failed = "SRAIXFAILED";
     public static String sraix_no_hint = "nohint";

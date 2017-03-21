@@ -44,6 +44,13 @@ public class NetworkUtils {
 
 
 	public static String responseContent(String url) throws Exception {
+		
+		/* From the Jeannie api on mashape
+		 * HttpResponse<JsonNode> response = Unirest.get("https://jeannie.p.mashape.com/api?input=who+created+you&locale=en&location=53.0%2C9.0&page=1&timeZone=%2B120")
+.header("X-Mashape-Key", "dG6NYxGf8lmshZSsiMZAPsV3VjTXp1tnTW2jsnjPnHxQ2YlThr")
+.header("Accept", "application/json")
+.asJson();
+		 */
 		HttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet();
 		request.setURI(new URI(url));

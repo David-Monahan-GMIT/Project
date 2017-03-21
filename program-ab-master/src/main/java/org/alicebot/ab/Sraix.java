@@ -1,4 +1,7 @@
 package org.alicebot.ab;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 /* Program AB Reference AIML 2.0 implementation
         Copyright (C) 2013 ALICE A.I. Foundation
         Contact: info@alicebot.org
@@ -108,10 +111,30 @@ public class Sraix {
             if (chatSession.locationKnown) {
                 locationString = "&location="+chatSession.latitude+","+chatSession.longitude;
             }
-            // https://weannie.pannous.com/api?input=when+is+daylight+savings+time+in+the+us&locale=en_US&login=pandorabots&ip=169.254.178.212&botid=0&key=CKNgaaVLvNcLhDupiJ1R8vtPzHzWc8mhIQDFSYWj&exclude=Dialogues,ChatBot&out=json
-            String url = "https://weannie.pannous.com/api?input="+input+"&locale=en_US&timeZone="+offset+locationString+"&login="+MagicStrings.pannous_login+"&ip="+NetworkUtils.localIPAddress()+"&botid=0&key="+MagicStrings.pannous_api_key+"&exclude=Dialogues,ChatBot&out=json";
+            // 
+            //"https://weannie.pannous.com/api?input=when+is+daylight+savings+time+in+the+us&locale=en_US&login=pandorabots&ip=169.254.178.212&botid=0&key=CKNgaaVLvNcLhDupiJ1R8vtPzHzWc8mhIQDFSYWj&exclude=Dialogues,ChatBot&out=json";
+            // String url = "https://jeannie.p.mashape.com/api?input="+input+"&locale=en_Uk&timeZone="+offset+locationString+"&login="+MagicStrings.pannous_login+"&ip="+NetworkUtils.localIPAddress()+"&botid=0&key="+MagicStrings.pannous_api_key+"&exclude=Dialogues,ChatBot&out=json";
+            // String url = "https://weannie.pannous.com/api?input="+input+"&locale=en_Uk&timeZone="+offset+locationString+"&login="+MagicStrings.pannous_login+"&ip="+NetworkUtils.localIPAddress()+"&botid=0&key="+MagicStrings.pannous_api_key+"&exclude=Dialogues,ChatBot&out=json";
+            
+            
+    		/* From the Jeannie api on mashape
+    		 * HttpResponse<JsonNode> response = Unirest.get("https://jeannie.p.mashape.com/api?input=who+created+you&locale=en&location=53.0%2C9.0&page=1&timeZone=%2B120")
+    .header("X-Mashape-Key", "dG6NYxGf8lmshZSsiMZAPsV3VjTXp1tnTW2jsnjPnHxQ2YlThr")
+    .header("Accept", "application/json")
+    .asJson();
+    		 */
+            
+            //String url ="https://weannie.pannous.com/api?input="+input+"&locale=en_Uk&login=test-user&exclude=Dialogues,ChatBot&out=json";
+            URL url = new URL("https://weannie.pannous.com/api?input="+input+"&locale=en_Uk&login=test-user&exclude=Dialogues,ChatBot&out=json");
             log.debug("Sraix url='"+url+"'");
-            String page = NetworkUtils.responseContent(url);
+           // String page = NetworkUtils.responseContent(url);
+            BufferedReader in = new BufferedReader(
+            new InputStreamReader(url.openStream()));
+            
+            String inputLine, page =null;
+            while ((inputLine = in.readLine()) != null)
+                page += "\r\n" + inputLine;
+            in.close();
             log.debug( "Sraix: "+page);
             String text="";
             String imgRef="";

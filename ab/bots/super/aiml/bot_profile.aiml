@@ -51,7 +51,7 @@
 <template>I'm a mobile virtual assistant.</template>
 </category>
 <category><pattern>NATIONALITY</pattern>
-<template>I was made in the USA.</template>
+<template>I was made in Ireland.</template>
 </category>
 <category><pattern>DOING</pattern>
 <template><random>
