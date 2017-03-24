@@ -51,10 +51,12 @@ public class NetworkUtils {
 .header("Accept", "application/json")
 .asJson();
 		 */
+		
+		
 		HttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet();
 		request.setURI(new URI(url));
-		InputStream is = client.execute(request).getEntity().getContent();
+		InputStream is = client.execute(request).getEntity().getContent();		
 		BufferedReader inb = new BufferedReader(new InputStreamReader(is));
 		StringBuilder sb = new StringBuilder("");
 		String line;

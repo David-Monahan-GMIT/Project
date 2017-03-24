@@ -114,7 +114,7 @@ public class Sraix {
             // 
             //"https://weannie.pannous.com/api?input=when+is+daylight+savings+time+in+the+us&locale=en_US&login=pandorabots&ip=169.254.178.212&botid=0&key=CKNgaaVLvNcLhDupiJ1R8vtPzHzWc8mhIQDFSYWj&exclude=Dialogues,ChatBot&out=json";
             // String url = "https://jeannie.p.mashape.com/api?input="+input+"&locale=en_Uk&timeZone="+offset+locationString+"&login="+MagicStrings.pannous_login+"&ip="+NetworkUtils.localIPAddress()+"&botid=0&key="+MagicStrings.pannous_api_key+"&exclude=Dialogues,ChatBot&out=json";
-            // String url = "https://weannie.pannous.com/api?input="+input+"&locale=en_Uk&timeZone="+offset+locationString+"&login="+MagicStrings.pannous_login+"&ip="+NetworkUtils.localIPAddress()+"&botid=0&key="+MagicStrings.pannous_api_key+"&exclude=Dialogues,ChatBot&out=json";
+             String url = "http://weannie.pannous.com/api?input="+input+"&locale=en_Uk&timeZone="+offset+locationString+"&login="+MagicStrings.pannous_login+"&ip="+NetworkUtils.localIPAddress()+"&botid=0&key="+MagicStrings.pannous_api_key+"&exclude=Dialogues,ChatBot&out=json";
             
             
     		/* From the Jeannie api on mashape
@@ -124,17 +124,17 @@ public class Sraix {
     .asJson();
     		 */
             
-            //String url ="https://weannie.pannous.com/api?input="+input+"&locale=en_Uk&login=test-user&exclude=Dialogues,ChatBot&out=json";
-            URL url = new URL("https://weannie.pannous.com/api?input="+input+"&locale=en_Uk&login=test-user&exclude=Dialogues,ChatBot&out=json");
+           // String url ="http://weannie.pannous.com/api?input="+input+"&locale=en_Uk&login=test-user&exclude=Dialogues,ChatBot&out=json";
+         //   URL url = new URL("https://weannie.pannous.com/api?input="+input+"&locale=en_Uk&login=test-user&exclude=Dialogues,ChatBot&out=json");
             log.debug("Sraix url='"+url+"'");
-           // String page = NetworkUtils.responseContent(url);
-            BufferedReader in = new BufferedReader(
+           String page = NetworkUtils.responseContent(url);
+/*            BufferedReader in = new BufferedReader(
             new InputStreamReader(url.openStream()));
             
             String inputLine, page =null;
             while ((inputLine = in.readLine()) != null)
                 page += "\r\n" + inputLine;
-            in.close();
+            in.close();*/
             log.debug( "Sraix: "+page);
             String text="";
             String imgRef="";
