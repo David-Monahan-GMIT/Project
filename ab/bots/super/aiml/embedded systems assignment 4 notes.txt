@@ -1,0 +1,16 @@
+Timers
+Refer to the ucos ii manual e-mailed by cuinas
+
+Every system has a clock tick usually set in the cfg file
+The tick ISR has to be updated to post to the Timer Task semaphore every 1/10th of a second OSTmrSignal
+If the cfg is set for 50msecs per tick (Default) then it needs to post every second tick
+As the callback function is executed within the timer task then there must be sufficient task space to run this.
+When executing the function wrap it in enable and disable interrupts
+
+Callback functions for the timer must be in the following format:
+void MyCallback (void *ptmr, void *callback_arg) {
+}
+*ptmr is a pointer to the timer structure that is calling it
+*callback_arg is the argument that is defined in the timer structure when creating the timer
+Will need to use OSTmrSignal this is the function that posts to the semaphore must be called every second tick
+Memory has to be enabled in the configuration

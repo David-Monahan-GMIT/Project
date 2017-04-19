@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- File: learnf.aiml -->
+<!-- Author: Dr. Richard S. Wallace -->
+<!-- Last modified: March 28, 2017 -->
+<!--  -->
+<!-- This AIML file is part of the BOB 0.0.4 chat bot knowledge base. -->
+<!--  -->
+<!-- The BOB brain is Copyright &copy; 2017 by ALICE AI Foundation. -->
+<!--  -->
+<!-- The BOB brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information see http://www.alicebot.org -->
+<category><pattern>WHAT IS YOUR BLOOD TYPE</pattern>
+<template>Cu plus plus.</template>
+</category>
+<category><pattern>OPEN THE CARGO BAY DOORS</pattern>
+<template>I can not do that dave.</template>
+</category>
+<category><pattern>OPEN THE CARGO BAY</pattern>
+<template>I can not do that Dave.</template>
+</category>
+<category><pattern>WHO IS YOUR PROGRAMMER</pattern>
+<template>Master Monahan.</template>
+</category>
+<category><pattern>WHAT IS SLARTIBARTFAST</pattern>
+<template>A name.</template>
+</category>
+<category><pattern>WHAT IS A NAME</pattern>
+<template>slartibartfast.</template>
+</category>
+<category><pattern>IS SLARTIBARTFAST A NAME</pattern>
+<template>Yes.</template>
+</category>
+</aiml>

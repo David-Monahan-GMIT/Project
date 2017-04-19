@@ -24,5 +24,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Project/ab/lib/Ab.jar" sourcepath="src/main/java"/>
+	<classpathentry kind="var" path="SWT_LIB"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
