@@ -16,12 +16,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Dave/Project/Project/ab/lib/Ab.jar" sourcepath="src/main/java"/>
+	<classpathentry kind="var" path="SWT_HOME"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

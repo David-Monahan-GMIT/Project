@@ -54,70 +54,124 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ChatFrame extends JInternalFrame implements ActionListener {
-	
-	
-	private JPanel mainPanel;
 
-	private ArrayList<JButton> buttons;
+	private JPanel mainPanel;
 
 	// static integers used to determine new window positions
 	// for cascading windows
 	private static int xOffset = 0, yOffset = 0;
 
-	private int rowCount = 5;
-	private int colCount = 5;
+	private int rowCount = 2;
+	private int colCount = 3;
+
+	Bot bot;
+	Chat chatSession;
+	Logger log;
+	
+    private JTextArea textArea;
+    private JTextField inputTextField;
+    private JButton sendButton;
 
 	public ChatFrame(String botName, Boolean traceMode, String action, Logger log) {
+		// Give the frame a name
 		super("Chat Session", true, true);
+		
+		// Setup the parameters needed for the bot to run.
+		bot = new Bot(botName, MagicStrings.root_path + "/../ab/", action);
+		chatSession = new Chat(bot);
+		this.log = log;
+		bot.brain.nodeStats();
+		MagicBooleans.trace_mode = traceMode;
 
-		mainPanel = new JPanel();
+		// Create a gui frame
+/*		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(rowCount, colCount, 5, 5));
+		chatHistory = new JTextArea(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		queryBox = new JTextArea();
+		JLabel user = new JLabel("User:");
+		JLabel robot = new JLabel("Bot:");
+	//	JButton sendQuery = new JButton("SendQuery");
+		sendQuery.addActionListener(this);
+		JLabel spacer = new JLabel("");
+		
+		mainPanel.add(robot);
+		mainPanel.add(chatHistory);
+		mainPanel.add(spacer);
+		mainPanel.add(user);
+		mainPanel.add(queryBox);
+		mainPanel.add(sendQuery);*/
 
-		Container container = getContentPane();
-		container.add(mainPanel, BorderLayout.CENTER);
+        textArea = new JTextArea(20, 50);
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+        Box box = Box.createHorizontalBox();
+        add(box, BorderLayout.SOUTH);
+        inputTextField = new JTextField();
+        sendButton = new JButton("Send");
+        box.add(inputTextField);
+        box.add(sendButton);
+        
+        inputTextField.addActionListener(this);
+        sendButton.addActionListener(this);
+		
+
+		//Container container = getContentPane();
+		//container.add(mainPanel, BorderLayout.CENTER);
 
 		setBounds(xOffset, yOffset, 500, 500);
 		xOffset = (xOffset + 30) % 500;
 		yOffset = (yOffset + 30) % 500;
-		
-        Bot bot = new Bot(botName, MagicStrings.root_path+"/../ab/", action);
-		Chat chatSession = new Chat(bot);
-//       bot.preProcessor.normalizeFile("c:/ab/bots/super/aiml/thats.txt", "c:/ab/bots/super/aiml/normalthats.txt");
-       bot.brain.nodeStats();
-       MagicBooleans.trace_mode = traceMode;
-       String textLine="";
-       while (true) {
-           System.out.print("Human: ");
-			textLine = IOUtils.readInputTextLine();
-           if (textLine == null || textLine.length() < 1)  textLine = MagicStrings.null_input;
-           if (textLine.equals("q")) System.exit(0);
-           else if (textLine.equals("wq")) {
-               bot.writeQuit();
-               System.exit(0);
-           }
-           //else if (textLine.equals("ab")) testAB(bot);
-           else {
-               String request = textLine;
-               log.debug("STATE="+request+":THAT="+chatSession.thatHistory.get(0).get(0)+":TOPIC="+chatSession.predicates.get("topic"));
-               String response = chatSession.multisentenceRespond(request);
-               while (response.contains("&lt;")) response = response.replace("&lt;","<");
-               while (response.contains("&gt;")) response = response.replace("&gt;",">");
-               log.info("Robot: "+response);
 
-           }
 
-       }
 	}
-
-
 
 	@Override
 	/**
 	 * 
 	 */
 	public synchronized void actionPerformed(ActionEvent e) {
-		
+		textArea.append("User: " + inputTextField.getText() + "\r\n");		
+		textArea.append("Bot: " + chat(inputTextField.getText()) + "\r\n");
+		inputTextField.setText("");
+
 	}
 
+	/**
+	 * Utilty method for chatting to the specified bot.
+	 * 
+	 * @param query
+	 *            The User message to the bot
+	 * @return The response from the bot to the query, returns "Invalid Query"
+	 *         if a bad query is passed.
+	 */
+	private synchronized String chat(String query) {
+
+		String textLine = query;
+		// System.out.print("Human: ");
+		// textLine = IOUtils.readInputTextLine();
+		if (textLine == null || textLine.length() < 1)
+			textLine = MagicStrings.null_input;
+		if (textLine.equals("q"))
+			System.exit(0);
+		else if (textLine.equals("wq")) {
+			bot.writeQuit();
+			System.exit(0);
+		} else {
+			String request = textLine;
+			log.debug("STATE=" + request + ":THAT=" + chatSession.thatHistory.get(0).get(0) + ":TOPIC="
+					+ chatSession.predicates.get("topic"));
+			String response = chatSession.multisentenceRespond(request);
+			while (response.contains("&lt;"))
+				response = response.replace("&lt;", "<");
+			while (response.contains("&gt;"))
+				response = response.replace("&gt;", ">");
+			log.info("Robot: " + response);
+
+			return response;
+		}
+		return "Invalid Query";
+	}
 
 }
