@@ -22,21 +22,16 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.TreeMap;
 
-import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.alicebot.ab.AB;
@@ -55,27 +50,22 @@ import org.slf4j.LoggerFactory;
 
 public class ChatFrame extends JInternalFrame implements ActionListener {
 
-	private JPanel mainPanel;
-
 	// static integers used to determine new window positions
 	// for cascading windows
 	private static int xOffset = 0, yOffset = 0;
 
-	private int rowCount = 2;
-	private int colCount = 3;
-
 	Bot bot;
 	Chat chatSession;
 	Logger log;
-	
-    private JTextArea textArea;
-    private JTextField inputTextField;
-    private JButton sendButton;
+
+	private JTextArea textArea;
+	private JTextField inputTextField;
+	private JButton sendButton;
 
 	public ChatFrame(String botName, Boolean traceMode, String action, Logger log) {
 		// Give the frame a name
 		super("Chat Session", true, true);
-		
+
 		// Setup the parameters needed for the bot to run.
 		bot = new Bot(botName, MagicStrings.root_path + "/../ab/", action);
 		chatSession = new Chat(bot);
@@ -83,47 +73,27 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 		bot.brain.nodeStats();
 		MagicBooleans.trace_mode = traceMode;
 
-		// Create a gui frame
-/*		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(rowCount, colCount, 5, 5));
-		chatHistory = new JTextArea(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		queryBox = new JTextArea();
-		JLabel user = new JLabel("User:");
-		JLabel robot = new JLabel("Bot:");
-	//	JButton sendQuery = new JButton("SendQuery");
-		sendQuery.addActionListener(this);
-		JLabel spacer = new JLabel("");
-		
-		mainPanel.add(robot);
-		mainPanel.add(chatHistory);
-		mainPanel.add(spacer);
-		mainPanel.add(user);
-		mainPanel.add(queryBox);
-		mainPanel.add(sendQuery);*/
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		// textArea.setLineWrap(true);
+		add(new JScrollPane(textArea), BorderLayout.CENTER);
 
-        textArea = new JTextArea(20, 50);
-        textArea.setEditable(false);
-        textArea.setLineWrap(true);
-        add(new JScrollPane(textArea), BorderLayout.CENTER);
+		Box box = Box.createHorizontalBox();
+		add(box, BorderLayout.SOUTH);
+		inputTextField = new JTextField();
+		sendButton = new JButton("Send");
+		box.add(inputTextField);
+		box.add(sendButton);
 
-        Box box = Box.createHorizontalBox();
-        add(box, BorderLayout.SOUTH);
-        inputTextField = new JTextField();
-        sendButton = new JButton("Send");
-        box.add(inputTextField);
-        box.add(sendButton);
-        
-        inputTextField.addActionListener(this);
-        sendButton.addActionListener(this);
-		
+		inputTextField.addActionListener(this);
+		sendButton.addActionListener(this);
 
-		//Container container = getContentPane();
-		//container.add(mainPanel, BorderLayout.CENTER);
+		// Container container = getContentPane();
+		// container.add(mainPanel, BorderLayout.CENTER);
 
 		setBounds(xOffset, yOffset, 500, 500);
 		xOffset = (xOffset + 30) % 500;
 		yOffset = (yOffset + 30) % 500;
-
 
 	}
 
@@ -132,8 +102,9 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	 * 
 	 */
 	public synchronized void actionPerformed(ActionEvent e) {
-		textArea.append("User: " + inputTextField.getText() + "\r\n");		
+		textArea.append("User: " + inputTextField.getText() + "\r\n");
 		textArea.append("Bot: " + chat(inputTextField.getText()) + "\r\n");
+
 		inputTextField.setText("");
 
 	}
@@ -163,15 +134,26 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			log.debug("STATE=" + request + ":THAT=" + chatSession.thatHistory.get(0).get(0) + ":TOPIC="
 					+ chatSession.predicates.get("topic"));
 			String response = chatSession.multisentenceRespond(request);
-			while (response.contains("&lt;"))
-				response = response.replace("&lt;", "<");
-			while (response.contains("&gt;"))
-				response = response.replace("&gt;", ">");
-			log.info("Robot: " + response);
 
+			response = parseResponse(response);
+			log.info("Robot: " + response);
 			return response;
 		}
 		return "Invalid Query";
+	}
+
+	/**
+	 * Method for cleaning up the response from the chat bot.
+	 * 
+	 * @param response
+	 * @return
+	 */
+	private synchronized String parseResponse(String response) {
+		while (response.contains("&lt;"))
+			response = response.replace("&lt;", "<");
+		while (response.contains("&gt;"))
+			response = response.replace("&gt;", ">");
+		return response;
 	}
 
 }
