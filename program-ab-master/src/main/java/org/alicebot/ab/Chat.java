@@ -42,7 +42,7 @@ public class Chat {
     public static String latitude;
 
     /**
-     * Constructor  (defualt customer ID)
+     * Constructor  (default customer ID)
      *
      * @param bot    the bot to chat with
      */
