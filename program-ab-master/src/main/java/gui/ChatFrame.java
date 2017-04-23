@@ -102,8 +102,8 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	 * 
 	 */
 	public synchronized void actionPerformed(ActionEvent e) {
-		textArea.append("User: " + inputTextField.getText() + "\r\n");
-		textArea.append("Bot: " + chat(inputTextField.getText()) + "\r\n");
+		textArea.append(chatSession.predicates.get("name") + ": " + inputTextField.getText() + "\r\n");
+		textArea.append( bot.name +": " + chat(inputTextField.getText()) + "\r\n");
 
 		inputTextField.setText("");
 
