@@ -67,11 +67,11 @@ public class PredicatesFrame extends JInternalFrame implements ActionListener {
 		super("Predicate Settings", true, true);
 
 		// Setup the parameters needed for the bot to run.
-	//	bot = new Bot(botName, MagicStrings.root_path + "/../ab/", action);
-		
+		// bot = new Bot(botName, MagicStrings.root_path + "/../ab/", action);
+
 		this.log = log;
-	//	bot.brain.nodeStats();
-	//	MagicBooleans.trace_mode = traceMode;
+		// bot.brain.nodeStats();
+		// MagicBooleans.trace_mode = traceMode;
 
 		textArea = new JTextArea();
 		textArea.setEditable(false);
@@ -103,7 +103,7 @@ public class PredicatesFrame extends JInternalFrame implements ActionListener {
 	 */
 	public synchronized void actionPerformed(ActionEvent e) {
 		textArea.append(chatSession.predicates.get("name") + ": " + inputTextField.getText() + "\r\n");
-		textArea.append( bot.name +": " + chat(inputTextField.getText()) + "\r\n");
+		textArea.append(bot.name + ": " + chat(inputTextField.getText()) + "\r\n");
 
 		inputTextField.setText("");
 

@@ -62,14 +62,16 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	private JTextArea textArea;
 	private JTextField inputTextField;
 	private JButton sendButton;
+	private JDesktopPane desktop;
 
-	public ChatFrame(String botName, Boolean traceMode, String action, Logger log) {
+	public ChatFrame(String botName, Boolean traceMode, String action, JDesktopPane desktop, Logger log) {
 		// Give the frame a name
 		super("Chat Session", true, true);
 
 		// Setup the parameters needed for the bot to run.
 		bot = new Bot(botName, MagicStrings.root_path + "/../ab/", action);
 		chatSession = new Chat(bot);
+		this.desktop=desktop;
 		this.log = log;
 		bot.brain.nodeStats();
 		MagicBooleans.trace_mode = traceMode;
@@ -88,9 +90,6 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 
 		inputTextField.addActionListener(this);
 		sendButton.addActionListener(this);
-
-		// Container container = getContentPane();
-		// container.add(mainPanel, BorderLayout.CENTER);
 
 		setBounds(xOffset, yOffset, 500, 500);
 		xOffset = (xOffset + 30) % 500;
@@ -150,7 +149,8 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	 * 
 	 * 
 	 * @param response
-	 * @return
+	 *            The chatbot response that needs to be parsed
+	 * @return A cleaned up version of the chatbot response
 	 */
 	private synchronized String parseResponse(String response) {
 		while (response.contains("&lt;"))
@@ -168,11 +168,11 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 				url = url.replaceAll("\"\\><.*", "");
 				BufferedImage img = ImageIO.read(new URL(url));
 				JLabel label = new JLabel(new ImageIcon(img));
-				JFrame f = new JFrame();
-				// f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				JInternalFrame f = new JInternalFrame("Image",false,true);
 				f.getContentPane().add(label);
 				f.pack();
-				f.setLocation(600, 200);
+				f.setLocation(510, yOffset+10);
+				desktop.add(f);
 				f.setVisible(true);
 			} catch (IOException ex) {
 				ex.printStackTrace();

@@ -62,6 +62,11 @@ import org.slf4j.LoggerFactory;
  */
 
 public class Main extends JFrame {
+	/**
+	 * Shuts up the compiler
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final Logger log = LoggerFactory.getLogger(Main.class);
 
 	private JDesktopPane desktop;
@@ -177,7 +182,7 @@ public class Main extends JFrame {
 
 		// display window in which user can input entry
 		public void actionPerformed(ActionEvent e) {
-			ChatFrame frame = new ChatFrame("super", MagicBooleans.trace_mode, "chat", log);
+			ChatFrame frame = new ChatFrame("super", MagicBooleans.trace_mode, "chat",desktop, log);
 			desktop.add(frame);
 			frame.setVisible(true);
 		}
@@ -225,11 +230,18 @@ public class Main extends JFrame {
 
 	} // end inner class NewAction
 
-	// inner class defines action that closes connection to
-	// database and terminates program
+	/**
+	 * Private inner class to govern shutting down everything properly. 
+	 * @author Dave
+	 *
+	 */
 	private class ExitAction extends AbstractAction {
 
-		// set up action's name, descriptions and mnemonic
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public ExitAction() {
 			putValue(NAME, "Exit");
 			putValue(SHORT_DESCRIPTION, "Exit");
