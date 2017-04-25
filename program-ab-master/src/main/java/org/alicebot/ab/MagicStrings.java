@@ -24,6 +24,7 @@ package org.alicebot.ab;
  */
 public class MagicStrings {
 	// General global strings
+	public static final String projectLocation = "C:/Users/Dave/Project/Project/";
 	public static String programNameVersion = "Program AB 0.0.4.3 beta -- AI Foundation Reference AIML 2.0 implementation";
 	public static String comment = "removed some recursion from Path";
 	public static String aimlif_split_char = ",";

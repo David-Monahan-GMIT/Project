@@ -24,6 +24,9 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -66,6 +69,7 @@ public class Main extends JFrame {
 	 * Shuts up the compiler
 	 */
 	private static final long serialVersionUID = 1L;
+
 
 	private static final Logger log = LoggerFactory.getLogger(Main.class);
 
@@ -113,7 +117,7 @@ public class Main extends JFrame {
 
 		// set up menu bar
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.add(fileMenu);
+		//menuBar.add(fileMenu);
 		setJMenuBar(menuBar);
 
 		// set up desktop
@@ -138,7 +142,7 @@ public class Main extends JFrame {
 		Dimension dimension = toolkit.getScreenSize();
 
 		// center window on screen
-		setBounds(100, 100, dimension.width - 200, dimension.height - 100);
+		setBounds(100, 10, dimension.width - 200, dimension.height - 100);
 
 		setVisible(true);
 
@@ -172,19 +176,21 @@ public class Main extends JFrame {
 
 		// set up action's name, icon, descriptions and mnemonic
 		public NewChatSession() {
-			putValue(NAME, "New");
-			// putValue(SMALL_ICON, new
-			// ImageIcon(getClass().getResource("images/New24.png")));
-			putValue(SHORT_DESCRIPTION, "New");
+			putValue(NAME, "Chat!");
+			putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/chat.png"));
+			System.out.println(MagicStrings.projectLocation + "img/chat.png");
+			putValue(SHORT_DESCRIPTION, "Chat!");
 			putValue(LONG_DESCRIPTION, "Start a Conversation with a Bot");
 			putValue(MNEMONIC_KEY, new Integer('N'));
 		}
 
 		// display window in which user can input entry
 		public void actionPerformed(ActionEvent e) {
-			ChatFrame frame = new ChatFrame("super", MagicBooleans.trace_mode, "chat",desktop, log);
+			ChatFrame frame = new ChatFrame("super", MagicBooleans.trace_mode, "chat", desktop, log);
 			desktop.add(frame);
 			frame.setVisible(true);
+			frame.setTextAreaFocus(); // Set the input focus to the text field
+										// after drawing the panel
 		}
 
 	} // end inner class NewAction
@@ -231,7 +237,8 @@ public class Main extends JFrame {
 	} // end inner class NewAction
 
 	/**
-	 * Private inner class to govern shutting down everything properly. 
+	 * Private inner class to govern shutting down everything properly.
+	 * 
 	 * @author Dave
 	 *
 	 */

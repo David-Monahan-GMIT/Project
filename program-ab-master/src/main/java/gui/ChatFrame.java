@@ -71,7 +71,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 		// Setup the parameters needed for the bot to run.
 		bot = new Bot(botName, MagicStrings.root_path + "/../ab/", action);
 		chatSession = new Chat(bot);
-		this.desktop=desktop;
+		this.desktop = desktop;
 		this.log = log;
 		bot.brain.nodeStats();
 		MagicBooleans.trace_mode = traceMode;
@@ -88,25 +88,45 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 		box.add(inputTextField);
 		box.add(sendButton);
 
-		inputTextField.addActionListener(this);
+		// Somewhat redundant, adds an actionlistener to the textArea that
+		// triggers when the enter button is pressed
+		// inputTextField.addActionListener(this);
 		sendButton.addActionListener(this);
 
-		setBounds(xOffset, yOffset, 500, 500);
-		xOffset = (xOffset + 30) % 500;
-		yOffset = (yOffset + 30) % 500;
+		setBounds(xOffset, yOffset, 700, 600);
+		// xOffset = (xOffset + 30) % 500;
+		// yOffset = (yOffset + 30) % 500;
 
+		// Sets the default focus for the enter key
+		getRootPane().setDefaultButton(sendButton);
+
+	}
+
+	/**
+	 * Utility method to allow me to call the text area to request focus after
+	 * the JPanel has been drawn and displayed
+	 */
+	public void setTextAreaFocus() {
+		inputTextField.requestFocus();
 	}
 
 	@Override
 	/**
+	 * Action Listener for handling chat requests. Triggers whenever the send
+	 * button is pressed. Uses the current chatSession to assign user and Bot
+	 * names for the chat frame.
 	 * 
 	 */
 	public synchronized void actionPerformed(ActionEvent e) {
 		textArea.append(chatSession.predicates.get("name") + ": " + inputTextField.getText() + "\r\n");
-		textArea.append(bot.name + ": " + chat(inputTextField.getText()) + "\r\n");
-
+		textArea.append(chatSession.bot.properties.get("name") + ": " + chat(inputTextField.getText()) + "\r\n");
+		// Sets the carat position in the text area so that it also scrolls when
+		// new text is added
+		textArea.setCaretPosition(textArea.getText() != null ? textArea.getText().length() : 0);
 		inputTextField.setText("");
-
+		inputTextField.requestFocus(); // ensures the input focus snaps back to
+										// the textArea ie after an image is
+										// displayed
 	}
 
 	/**
@@ -168,17 +188,35 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 				url = url.replaceAll("\"\\><.*", "");
 				BufferedImage img = ImageIO.read(new URL(url));
 				JLabel label = new JLabel(new ImageIcon(img));
-				JInternalFrame f = new JInternalFrame("Image",false,true);
+				JInternalFrame f = new JInternalFrame("Image", false, true);
 				f.getContentPane().add(label);
 				f.pack();
-				f.setLocation(510, yOffset+10);
+				f.setLocation(710, yOffset + 10);
 				desktop.add(f);
 				f.setVisible(true);
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
 
-			return response.split(MagicStrings.imageRegex)[0];
+			return (response.split(MagicStrings.imageRegex)[0]).substring(0,
+					(response.split(MagicStrings.imageRegex)[0]).lastIndexOf('.'));
+		} else if (response.contains("<img src=\"")) {
+			try {
+				String url = response.substring(response.indexOf("<img src=\""), (response.length() - 3));
+				url = url.replace("<img src=\"", "");
+				BufferedImage img = ImageIO.read(new URL(url));
+				JLabel label = new JLabel(new ImageIcon(img));
+				JInternalFrame f = new JInternalFrame("Image", false, true);
+				f.getContentPane().add(label);
+				f.pack();
+				f.setLocation(710, yOffset + 10);
+				desktop.add(f);
+				f.setVisible(true);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+
+			return (response.substring(0, response.indexOf("<img src=\"")));
 		}
 		return response;
 	}
