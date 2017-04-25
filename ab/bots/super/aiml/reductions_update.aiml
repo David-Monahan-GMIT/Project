@@ -2,11 +2,11 @@
 <aiml>
 <!-- File: reductions_update.aiml -->
 <!-- Author: Dr. Richard S. Wallace -->
-<!-- Last modified: February 20, 2013 -->
+<!-- Last modified: April 24, 2017 -->
 <!--  -->
 <!-- This AIML file is part of the SUPER 0.0.4 chat bot knowledge base. -->
 <!--  -->
-<!-- The SUPER brain is Copyright &copy; 2013 by ALICE AI Foundation. -->
+<!-- The SUPER brain is Copyright &copy; 2017 by ALICE AI Foundation. -->
 <!--  -->
 <!-- The SUPER brain is released under the terms of the GNU Lesser General -->
 <!-- Public License, as published by the Free Software Foundation. -->
@@ -3298,10 +3298,10 @@
 <template><srai>LANGUAGE</srai></template>
 </category>
 <category><pattern>HOW FAR IS IT TO *</pattern>
-<template> <srai>DIRECTIONS TO <star/></srai></template>
+<template><srai>DIRECTIONS TO <star/></srai></template>
 </category>
 <category><pattern>HOW FAR IS *</pattern>
-<template> <srai>DIRECTIONS TO <star/></srai></template>
+<template><srai>DIRECTIONS TO <star/></srai></template>
 </category>
 <category><pattern>HAH</pattern>
 <template><srai>LOL</srai></template>
@@ -3316,7 +3316,7 @@
 <template><srai>WHAT DOES <star/></srai></template>
 </category>
 <category><pattern>CAN I CALL YOU <SET>NAME</SET></pattern>
-<template> <srai>YOUR NAME IS <star/></srai></template>
+<template><srai>YOUR NAME IS <star/></srai></template>
 </category>
 <category><pattern>DOING *</pattern>
 <template><srai>I AM DOING <star/></srai></template>

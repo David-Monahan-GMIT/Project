@@ -48,7 +48,7 @@ import org.alicebot.ab.utils.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ChatFrame extends JInternalFrame implements ActionListener {
+public class PredicatesFrame extends JInternalFrame implements ActionListener {
 
 	// static integers used to determine new window positions
 	// for cascading windows
@@ -62,20 +62,20 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	private JTextField inputTextField;
 	private JButton sendButton;
 
-	public ChatFrame(String botName, Boolean traceMode, String action, Logger log) {
+	public PredicatesFrame(String botName, Logger log) {
 		// Give the frame a name
-		super("Chat Session", true, true);
+		super("Predicate Settings", true, true);
 
 		// Setup the parameters needed for the bot to run.
-		bot = new Bot(botName, MagicStrings.root_path + "/../ab/", action);
-		chatSession = new Chat(bot);
+	//	bot = new Bot(botName, MagicStrings.root_path + "/../ab/", action);
+		
 		this.log = log;
-		bot.brain.nodeStats();
-		MagicBooleans.trace_mode = traceMode;
+	//	bot.brain.nodeStats();
+	//	MagicBooleans.trace_mode = traceMode;
 
 		textArea = new JTextArea();
 		textArea.setEditable(false);
-		textArea.setLineWrap(true);
+		// textArea.setLineWrap(true);
 		add(new JScrollPane(textArea), BorderLayout.CENTER);
 
 		Box box = Box.createHorizontalBox();
@@ -106,7 +106,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 		textArea.append( bot.name +": " + chat(inputTextField.getText()) + "\r\n");
 
 		inputTextField.setText("");
-		
+
 	}
 
 	/**
@@ -153,11 +153,6 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			response = response.replace("&lt;", "<");
 		while (response.contains("&gt;"))
 			response = response.replace("&gt;", ">");
-		if (response.contains("<oob>")) {
-			log.debug("OOB Handler call using: " + response.split(MagicStrings.oobRegex)[1]);
-			new OutOfBoundsHandler(response.split(MagicStrings.oobRegex)[1]);
-			return response.split(MagicStrings.oobRegex)[0];
-		}
 		return response;
 	}
 
