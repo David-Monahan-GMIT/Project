@@ -22,6 +22,7 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Collections;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -103,10 +104,10 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	 */
 	public synchronized void actionPerformed(ActionEvent e) {
 		textArea.append(chatSession.predicates.get("name") + ": " + inputTextField.getText() + "\r\n");
-		textArea.append( bot.name +": " + chat(inputTextField.getText()) + "\r\n");
+		textArea.append(bot.name + ": " + chat(inputTextField.getText()) + "\r\n");
 
 		inputTextField.setText("");
-		
+
 	}
 
 	/**
@@ -143,7 +144,10 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	}
 
 	/**
-	 * Method for cleaning up the response from the chat bot.
+	 * Method for cleaning up the response from the chat bot. This will also
+	 * filter out and attempt to interpret responses from the bot for additional
+	 * features, such as image urls and out of bounds calls.
+	 * 
 	 * 
 	 * @param response
 	 * @return
@@ -157,6 +161,24 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			log.debug("OOB Handler call using: " + response.split(MagicStrings.oobRegex)[1]);
 			new OutOfBoundsHandler(response.split(MagicStrings.oobRegex)[1]);
 			return response.split(MagicStrings.oobRegex)[0];
+		}
+		if (response.contains("<a href=")) {
+			try {
+				String url = response.split(MagicStrings.imageRegex)[1];
+				url = url.replaceAll("\"\\><.*", "");
+				BufferedImage img = ImageIO.read(new URL(url));
+				JLabel label = new JLabel(new ImageIcon(img));
+				JFrame f = new JFrame();
+				// f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.getContentPane().add(label);
+				f.pack();
+				f.setLocation(600, 200);
+				f.setVisible(true);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+
+			return response.split(MagicStrings.imageRegex)[0];
 		}
 		return response;
 	}

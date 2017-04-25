@@ -103,4 +103,5 @@ public class MagicStrings {
 	public static String maps_path = bot_path + "/maps";
 	// Regular Expressions
 	public static String oobRegex = "\\<oob\\>";
+	public static String imageRegex = "\\<a href=\"";
 }

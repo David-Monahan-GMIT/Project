@@ -23,9 +23,7 @@ public class OutOfBoundsHandler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
-		if (handle.contains("search")) {
+		} else if (handle.contains("search")) {
 			try {
 				handle = handle.replace("<search>", "");
 				handle = handle.replace("</search>", "");
