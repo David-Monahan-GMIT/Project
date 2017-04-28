@@ -20,41 +20,20 @@ package gui;
         Boston, MA  02110-1301, USA.
 */
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.TreeMap;
-
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import org.alicebot.ab.AB;
 import org.alicebot.ab.AIMLProcessor;
-import org.alicebot.ab.Bot;
-import org.alicebot.ab.Category;
-import org.alicebot.ab.Chat;
-import org.alicebot.ab.Graphmaster;
 import org.alicebot.ab.MagicBooleans;
 import org.alicebot.ab.MagicStrings;
 import org.alicebot.ab.PCAIMLProcessorExtension;
-import org.alicebot.ab.Timer;
-import org.alicebot.ab.utils.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,11 +50,10 @@ public class Main extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-
 	private static final Logger log = LoggerFactory.getLogger(Main.class);
 
 	private JDesktopPane desktop;
-	Action newChatSession, exitAction, highScoreAction, helpScreenAction;
+	Action newChatSession, botConfigurationAction, exitAction, highScoreAction, helpScreenAction;
 
 	public Main() {
 		super("Chat Bot panel");
@@ -99,26 +77,21 @@ public class Main extends JFrame {
 
 		// Create GUI
 		JToolBar toolBar = new JToolBar();
-		JMenu fileMenu = new JMenu("File");
-		fileMenu.setMnemonic('F');
+
 
 		newChatSession = new NewChatSession();
+		botConfigurationAction = new BotConfigurationAction();
 		highScoreAction = new PredicatesAction();
 		helpScreenAction = new HelpScreenAction();
 		exitAction = new ExitAction();
 
 		toolBar.add(newChatSession);
+		toolBar.add(botConfigurationAction);
 		toolBar.add(highScoreAction);
 		toolBar.add(helpScreenAction);
 
-		fileMenu.add(newChatSession);
-		fileMenu.add(highScoreAction);
-		fileMenu.add(helpScreenAction);
-		fileMenu.add(exitAction);
-
 		// set up menu bar
 		JMenuBar menuBar = new JMenuBar();
-		//menuBar.add(fileMenu);
 		setJMenuBar(menuBar);
 
 		// set up desktop
@@ -168,6 +141,7 @@ public class Main extends JFrame {
 
 	}
 
+	@SuppressWarnings("serial")
 	private class NewChatSession extends AbstractAction {
 
 		/**
@@ -187,7 +161,7 @@ public class Main extends JFrame {
 
 		// display window in which user can input entry
 		public void actionPerformed(ActionEvent e) {
-			ChatFrame frame = new ChatFrame("super", MagicBooleans.trace_mode, "chat", desktop, log);
+			ChatFrame frame = new ChatFrame(MagicStrings.botName, MagicBooleans.trace_mode, "chat", desktop, log);
 			desktop.add(frame);
 			frame.setVisible(true);
 			frame.setTextAreaFocus(); // Set the input focus to the text field
@@ -196,6 +170,34 @@ public class Main extends JFrame {
 
 	} // end inner class NewAction
 
+	@SuppressWarnings("serial")
+	private class BotConfigurationAction extends AbstractAction {
+
+		/**
+		 * Adds a Serialisable id, mostly to shut up the compiler
+		 */
+		private static final long serialVersionUID = 1L;
+
+		// set up action's name, icon, descriptions and mnemonic
+		public BotConfigurationAction() {
+			putValue(NAME, "Confugre Bot");
+			//putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/chat.png"));
+			//System.out.println(MagicStrings.projectLocation + "img/chat.png");
+			putValue(SHORT_DESCRIPTION, "Bot Configuration");
+			putValue(LONG_DESCRIPTION, "Configure Bot to use and its base settings");
+			putValue(MNEMONIC_KEY, new Integer('N'));
+		}
+
+		// display window in which user can input entry
+		public void actionPerformed(ActionEvent e) {
+			BotConfigurationFrame frame = new BotConfigurationFrame(log);
+			desktop.add(frame);
+			frame.setVisible(true);
+		}
+
+	} // end inner class NewAction
+	
+	@SuppressWarnings("serial")
 	private class PredicatesAction extends AbstractAction {
 
 		// set up action's name, icon, descriptions and mnemonic
@@ -215,6 +217,7 @@ public class Main extends JFrame {
 
 	} // end inner class NewAction
 
+	@SuppressWarnings("serial")
 	private class HelpScreenAction extends AbstractAction {
 
 		// set up action's name, icon, descriptions and mnemonic

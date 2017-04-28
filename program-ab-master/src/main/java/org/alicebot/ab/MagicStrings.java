@@ -93,9 +93,10 @@ public class MagicStrings {
 	public static String map_successor = "successor";
 	public static String map_predecessor = "predecessor";
 	// paths
+	public static String botName = "super";
 	public static String root_path = "c:/ab";
 	public static String bot_path = root_path + "/bots";
-	public static String bot_name_path = bot_path + "/super";
+	public static String bot_name_path = bot_path + botName;
 	public static String aimlif_path = bot_path + "/aimlif";
 	public static String aiml_path = bot_path + "/aiml";
 	public static String config_path = bot_path + "/config";

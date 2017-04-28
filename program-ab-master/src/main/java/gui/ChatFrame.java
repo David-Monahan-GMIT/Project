@@ -107,9 +107,10 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 		box.add(inputTextField);
 		box.add(sendButton);
 
-		// Somewhat redundant, adds an actionlistener to the textArea that
+		// Removed due to redundancy adds an actionlistener to the textArea that
 		// triggers when the enter button is pressed
 		// inputTextField.addActionListener(this);
+		
 		sendButton.addActionListener(this);
 
 		setBounds(xOffset, yOffset, 700, 600);
