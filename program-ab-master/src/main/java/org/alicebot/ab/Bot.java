@@ -56,6 +56,7 @@ public class Bot {
 
     /**
      * Set all directory path variables for this bot
+     * Changed to static to allow for use outside of Bot
      *
      * @param root        root directory of Program AB
      * @param name        name of bot

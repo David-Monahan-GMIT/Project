@@ -153,8 +153,8 @@ public class Main extends JFrame {
 		// set up action's name, icon, descriptions and mnemonic
 		public NewChatSession() {
 			putValue(NAME, "Chat!");
-			putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/chat.png"));
-			System.out.println(MagicStrings.root_path + "img/chat.png");
+			putValue(SMALL_ICON, new ImageIcon(MagicStrings.root_path + "/../img/chat.png"));
+			log.debug(MagicStrings.root_path + "/../img/chat.png");
 			putValue(SHORT_DESCRIPTION, "Chat!");
 			putValue(LONG_DESCRIPTION, "Start a Conversation with a Bot");
 			putValue(MNEMONIC_KEY, new Integer('N'));

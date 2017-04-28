@@ -19,10 +19,13 @@ package org.alicebot.ab;
         Boston, MA  02110-1301, USA.
 */
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -90,6 +93,31 @@ public class Properties extends HashMap<String, String> {
                 getPropertiesFromInputStream(fstream);
                 //Close the input stream
                 fstream.close();
+            }
+        } catch (Exception e){//Catch exception if any
+            log.error("Cannot get properties from '" + filename + "': " + e, e);
+        }
+    }
+    
+    public void setProperties (String filename) {
+    	log.info("Set Properties: "+filename);
+        try {
+            // Open the file that is the first
+            // command line parameter
+            File file = new File(filename);
+            if (file.exists()) {
+                log.info("Exists: "+filename);
+                FileOutputStream fstream = new FileOutputStream(filename);
+                // Get the object
+                BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(fstream));
+                //Read File Line By Line
+               	for (String key : this.keySet()) {
+               		wr.write(key + ":" + this.get(key));
+               		wr.newLine();
+               		log.info(key + ":" + this.get(key));
+               	}
+                //Close the output stream
+                wr.close();
             }
         } catch (Exception e){//Catch exception if any
             log.error("Cannot get properties from '" + filename + "': " + e, e);
