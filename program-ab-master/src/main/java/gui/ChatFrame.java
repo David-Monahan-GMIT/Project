@@ -64,6 +64,25 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	private JButton sendButton;
 	private JDesktopPane desktop;
 
+	/**
+	 * Creates a new Chat Frame within the Desktop to allow the user to chat
+	 * with the Bot. This is effectively the main window of the application.
+	 * 
+	 * @param botName
+	 *            The name of the Bot to be run. This refers to the name of the
+	 *            root Folder of the Bot.
+	 * @param traceMode
+	 *            Enable or disable Verbose output from the bot. For Debugging.
+	 *            Only really affects the console output.
+	 * @param action
+	 *            The core Bot class has numerous Action states depending on
+	 *            what you want it to do. Mostly this will be Chat.
+	 * @param desktop
+	 *            The Desktop being used to display this window on. Used to draw
+	 *            subframes for things like images.
+	 * @param log
+	 *            The Main Logger.
+	 */
 	public ChatFrame(String botName, Boolean traceMode, String action, JDesktopPane desktop, Logger log) {
 		// Give the frame a name
 		super("Chat Session", true, true);
@@ -217,6 +236,11 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			}
 
 			return (response.substring(0, response.indexOf("<img src=\"")));
+		}
+		// Utility to pick up on a name change
+		if (response.contains("OK, from now on you can call me")) {
+			bot.properties.set("name", ((response.substring(response.lastIndexOf(" "))).replace(".", "")).trim());
+			log.debug(bot.properties.get("name"));
 		}
 		return response;
 	}

@@ -45,6 +45,10 @@ public class Properties extends HashMap<String, String> {
         if (result == null) return MagicStrings.unknown_property_value;
         else return result;
     }
+    
+    public void set(String key, String value) {
+    	super.put(key, value);
+    }
 
     /**
      * Read bot properties from an input stream.

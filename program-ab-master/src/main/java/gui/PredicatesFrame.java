@@ -53,107 +53,14 @@ public class PredicatesFrame extends JInternalFrame implements ActionListener {
 	// static integers used to determine new window positions
 	// for cascading windows
 	private static int xOffset = 0, yOffset = 0;
-
-	Bot bot;
-	Chat chatSession;
 	Logger log;
 
-	private JTextArea textArea;
-	private JTextField inputTextField;
-	private JButton sendButton;
-
 	public PredicatesFrame(String botName, Logger log) {
-		// Give the frame a name
-		super("Predicate Settings", true, true);
-
-		// Setup the parameters needed for the bot to run.
-		// bot = new Bot(botName, MagicStrings.root_path + "/../ab/", action);
-
-		this.log = log;
-		// bot.brain.nodeStats();
-		// MagicBooleans.trace_mode = traceMode;
-
-		textArea = new JTextArea();
-		textArea.setEditable(false);
-		// textArea.setLineWrap(true);
-		add(new JScrollPane(textArea), BorderLayout.CENTER);
-
-		Box box = Box.createHorizontalBox();
-		add(box, BorderLayout.SOUTH);
-		inputTextField = new JTextField();
-		sendButton = new JButton("Send");
-		box.add(inputTextField);
-		box.add(sendButton);
-
-		inputTextField.addActionListener(this);
-		sendButton.addActionListener(this);
-
-		// Container container = getContentPane();
-		// container.add(mainPanel, BorderLayout.CENTER);
-
-		setBounds(xOffset, yOffset, 500, 500);
-		xOffset = (xOffset + 30) % 500;
-		yOffset = (yOffset + 30) % 500;
-
 	}
 
 	@Override
-	/**
-	 * 
-	 */
-	public synchronized void actionPerformed(ActionEvent e) {
-		textArea.append(chatSession.predicates.get("name") + ": " + inputTextField.getText() + "\r\n");
-		textArea.append(bot.name + ": " + chat(inputTextField.getText()) + "\r\n");
-
-		inputTextField.setText("");
-
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
-
-	/**
-	 * Utilty method for chatting to the specified bot.
-	 * 
-	 * @param query
-	 *            The User message to the bot
-	 * @return The response from the bot to the query, returns "Invalid Query"
-	 *         if a bad query is passed.
-	 */
-	private synchronized String chat(String query) {
-
-		String textLine = query;
-		// System.out.print("Human: ");
-		// textLine = IOUtils.readInputTextLine();
-		if (textLine == null || textLine.length() < 1)
-			textLine = MagicStrings.null_input;
-		if (textLine.equals("q"))
-			System.exit(0);
-		else if (textLine.equals("wq")) {
-			bot.writeQuit();
-			System.exit(0);
-		} else {
-			String request = textLine;
-			log.debug("STATE=" + request + ":THAT=" + chatSession.thatHistory.get(0).get(0) + ":TOPIC="
-					+ chatSession.predicates.get("topic"));
-			String response = chatSession.multisentenceRespond(request);
-
-			response = parseResponse(response);
-			log.info("Robot: " + response);
-			return response;
-		}
-		return "Invalid Query";
-	}
-
-	/**
-	 * Method for cleaning up the response from the chat bot.
-	 * 
-	 * @param response
-	 * @return
-	 */
-	private synchronized String parseResponse(String response) {
-		while (response.contains("&lt;"))
-			response = response.replace("&lt;", "<");
-		while (response.contains("&gt;"))
-			response = response.replace("&gt;", ">");
-		return response;
-	}
-
 }
