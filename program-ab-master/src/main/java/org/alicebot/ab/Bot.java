@@ -60,7 +60,7 @@ public class Bot {
      * @param root        root directory of Program AB
      * @param name        name of bot
      */
-    public void setAllPaths (String root, String name) {
+    public static void setAllPaths (String root, String name) {
         MagicStrings.bot_path = root+"/bots";
         MagicStrings.bot_name_path = MagicStrings.bot_path+"/"+name;
         log.info("Name = {} Path = {}", name, MagicStrings.bot_name_path);
