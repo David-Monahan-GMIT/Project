@@ -53,7 +53,7 @@ public class Main extends JFrame {
 	private static final Logger log = LoggerFactory.getLogger(Main.class);
 
 	private JDesktopPane desktop;
-	Action newChatSession, botConfigurationAction, exitAction, highScoreAction, helpScreenAction;
+	Action newChatSession, botConfigurationAction, exitAction, predicatesAction, helpScreenAction;
 
 	public Main() {
 		super("Chat Bot panel");
@@ -81,14 +81,15 @@ public class Main extends JFrame {
 
 		newChatSession = new NewChatSession();
 		botConfigurationAction = new BotConfigurationAction();
-		highScoreAction = new PredicatesAction();
+		predicatesAction = new PredicatesAction();
 		helpScreenAction = new HelpScreenAction();
 		exitAction = new ExitAction();
 
 		toolBar.add(newChatSession);
 		toolBar.add(botConfigurationAction);
-		toolBar.add(highScoreAction);
+		toolBar.add(predicatesAction);
 		toolBar.add(helpScreenAction);
+		toolBar.setFloatable(false);
 
 		// set up menu bar
 		JMenuBar menuBar = new JMenuBar();
@@ -145,11 +146,6 @@ public class Main extends JFrame {
 	@SuppressWarnings("serial")
 	private class NewChatSession extends AbstractAction {
 
-		/**
-		 * Adds a Serialisable id, mostly to shut up the compiler
-		 */
-		private static final long serialVersionUID = 1L;
-
 		// set up action's name, icon, descriptions and mnemonic
 		public NewChatSession() {
 			putValue(NAME, "Chat!");
@@ -174,16 +170,11 @@ public class Main extends JFrame {
 	@SuppressWarnings("serial")
 	private class BotConfigurationAction extends AbstractAction {
 
-		/**
-		 * Adds a Serialisable id, mostly to shut up the compiler
-		 */
-		private static final long serialVersionUID = 1L;
-
 		// set up action's name, icon, descriptions and mnemonic
 		public BotConfigurationAction() {
 			putValue(NAME, "Configure Bot");
 			putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/robot.png"));
-			//System.out.println(MagicStrings.projectLocation + "img/chat.png");
+			log.debug(MagicStrings.projectLocation + "img/robot.png");
 			putValue(SHORT_DESCRIPTION, "Bot Configuration");
 			putValue(LONG_DESCRIPTION, "Configure Bot to use and its base settings");
 			putValue(MNEMONIC_KEY, new Integer('N'));
@@ -204,8 +195,8 @@ public class Main extends JFrame {
 		// set up action's name, icon, descriptions and mnemonic
 		public PredicatesAction() {
 			putValue(NAME, "Predicates");
-			// putValue(SMALL_ICON, new
-			// ImageIcon(getClass().getResource("images/New24.png")));
+			putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/list.png"));
+			log.debug(MagicStrings.projectLocation + "img/list.png");
 			putValue(SHORT_DESCRIPTION, "Predicates");
 			putValue(LONG_DESCRIPTION, "Change the Predicate settings for the current Bot");
 			putValue(MNEMONIC_KEY, new Integer('P'));
@@ -213,7 +204,9 @@ public class Main extends JFrame {
 
 		// display window in which user can input entry
 		public void actionPerformed(ActionEvent e) {
-			// create new internal window
+			PredicatesFrame frame = new PredicatesFrame(log);
+			desktop.add(frame);
+			frame.setVisible(true);
 		}
 
 	} // end inner class NewAction
