@@ -53,7 +53,7 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 		add(mainBox, BorderLayout.NORTH);
 
 		info = new JTextArea(
-				"Set the Directory of the Bot to be used. All of the bots must stored in the following directory: "
+				"Set the Directory Name of the Bot to be used. All of the bots must be stored in the following directory: "
 						+ System.getProperty("user.dir") + "\\..\\ab\\");
 		info.setFont(new Font("Serif", Font.PLAIN, 16));
 		info.setWrapStyleWord(true);

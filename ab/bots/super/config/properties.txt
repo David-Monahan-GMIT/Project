@@ -1,8 +1,7 @@
-url:http://www.alicebot.org
-name:Bob 
-email:callmom-info@pandorabots.com
 gender:male
-botmaster:Dr. Richard S. Wallace
 organization:ALICE AI Foundation
+name:Bob
+botmaster:Dr. Richard S. Wallace
 version:0.0.4
-
+url:http://www.alicebot.org
+email:callmom-info@pandorabots.com

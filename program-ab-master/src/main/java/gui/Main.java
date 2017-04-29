@@ -182,7 +182,7 @@ public class Main extends JFrame {
 		// set up action's name, icon, descriptions and mnemonic
 		public BotConfigurationAction() {
 			putValue(NAME, "Configure Bot");
-			//putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/chat.png"));
+			putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/robot.png"));
 			//System.out.println(MagicStrings.projectLocation + "img/chat.png");
 			putValue(SHORT_DESCRIPTION, "Bot Configuration");
 			putValue(LONG_DESCRIPTION, "Configure Bot to use and its base settings");
