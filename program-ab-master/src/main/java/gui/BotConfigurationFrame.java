@@ -104,10 +104,11 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 
 	@Override
 	/**
-	 * Action listener to handle all 3 buttons for this frame.
+	 * Action listener to handle all buttons for this frame.
 	 */
 	public void actionPerformed(ActionEvent e) {
 
+		// Load the data based on the selected bot. 
 		if (e.getSource() == loadButton) {
 			if (inputTextField.getText() != null && inputTextField.getText() != "") {
 				MagicStrings.botName = inputTextField.getText();
@@ -117,6 +118,8 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 			log.debug(MagicStrings.config_path + "/properties.txt");
 			drawGui();
 		}
+		
+		// Save the current data fields and close the window
 		if (e.getSource() == saveButton) {
 			for (String key : fields.keySet()) {
 				bot.put(key, fields.get(key).getText());
@@ -124,19 +127,29 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 			bot.setProperties(MagicStrings.config_path + "/properties.txt");
 			this.dispose();
 		}
+		
+		// Close the window without saving
 		if (e.getSource() == exitButton) {
 			this.dispose();
 		}
 
 	}
 
+
+	/**
+	 * Creates the GUI. Checks the size of the Hashmap to see how many rows need
+	 * to be created then generates each a row for each entry. Each row is on a
+	 * JPanel contained within a JScrollPane to allow for large amounts of data
+	 * to be displayed easily.
+	 */
 	private void drawGui() {
+		
 		
 		int rowCount = bot.size();
 		JScrollPane scrolly = new JScrollPane();
 		JPanel dataPanel = new JPanel();
 		leftPanel = new JPanel();
-		leftPanel.setLayout(new GridLayout(rowCount, 1, 0, 5));
+		leftPanel.setLayout(new GridLayout(rowCount, 1, 0, 7));
 		rightPanel = new JPanel();
 		rightPanel.setLayout(new GridLayout(rowCount, 1, 0, 5));
 		dataPanel.add(leftPanel, BorderLayout.WEST);

@@ -218,8 +218,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 				ex.printStackTrace();
 			}
 
-			return (response.split(MagicStrings.imageRegex)[0]).substring(0,
-					(response.split(MagicStrings.imageRegex)[0]).lastIndexOf('.'));
+			return (response.split(MagicStrings.imageRegex)[0]);
 		} else if (response.contains("<img src=\"")) {
 			try {
 				String url = response.substring(response.indexOf("<img src=\""), (response.length() - 3));
