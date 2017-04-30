@@ -106,4 +106,5 @@ public class MagicStrings {
 	// Regular Expressions
 	public static String oobRegex = "\\<oob\\>";
 	public static String imageRegex = "\\<a href=\"";
+	public static String commandRegex ="[a-z].*\\>";
 }

@@ -1,24 +1,4 @@
 package gui;
-/*
-/* Program AB Reference AIML 2.0 implementation
-        Copyright (C) 2013 ALICE A.I. Foundation
-        Contact: info@alicebot.org
-
-        This library is free software; you can redistribute it and/or
-        modify it under the terms of the GNU Library General Public
-        License as published by the Free Software Foundation; either
-        version 2 of the License, or (at your option) any later version.
-
-        This library is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-        Library General Public License for more details.
-
-        You should have received a copy of the GNU Library General Public
-        License along with this library; if not, write to the
-        Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
-        Boston, MA  02110-1301, USA.
-*/
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -40,15 +20,31 @@ import org.slf4j.LoggerFactory;
 /**
  * New version of main to incorporate a GUI
  * 
+ 		Program AB Reference AIML 2.0 implementation
+        Copyright (C) 2013 ALICE A.I. Foundation
+        Contact: info@alicebot.org
+
+        This library is free software; you can redistribute it and/or
+        modify it under the terms of the GNU Library General Public
+        License as published by the Free Software Foundation; either
+        version 2 of the License, or (at your option) any later version.
+
+        This library is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+        Library General Public License for more details.
+
+        You should have received a copy of the GNU Library General Public
+        License along with this library; if not, write to the
+        Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+        Boston, MA  02110-1301, USA.
+ * 
  * @author Dave
  *
  */
 
+@SuppressWarnings("serial")
 public class Main extends JFrame {
-	/**
-	 * Shuts up the compiler
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private static final Logger log = LoggerFactory.getLogger(Main.class);
 
@@ -78,7 +74,6 @@ public class Main extends JFrame {
 		// Create GUI
 		JToolBar toolBar = new JToolBar();
 
-
 		newChatSession = new NewChatSession();
 		botConfigurationAction = new BotConfigurationAction();
 		predicatesAction = new PredicatesAction();
@@ -90,6 +85,7 @@ public class Main extends JFrame {
 		toolBar.add(predicatesAction);
 		toolBar.add(helpScreenAction);
 		toolBar.setFloatable(false);
+
 
 		// set up menu bar
 		JMenuBar menuBar = new JMenuBar();
@@ -143,13 +139,12 @@ public class Main extends JFrame {
 
 	}
 
-	@SuppressWarnings("serial")
 	private class NewChatSession extends AbstractAction {
 
 		// set up action's name, icon, descriptions and mnemonic
 		public NewChatSession() {
 			putValue(NAME, "Chat!");
-			putValue(SMALL_ICON, new ImageIcon(MagicStrings.root_path + "/../img/chat.png"));
+			putValue(LARGE_ICON_KEY, new ImageIcon(MagicStrings.root_path + "/../img/chat.png"));
 			log.debug(MagicStrings.root_path + "/../img/chat.png");
 			putValue(SHORT_DESCRIPTION, "Chat!");
 			putValue(LONG_DESCRIPTION, "Start a Conversation with a Bot");
@@ -161,13 +156,12 @@ public class Main extends JFrame {
 			ChatFrame frame = new ChatFrame(MagicStrings.botName, MagicBooleans.trace_mode, "chat", desktop, log);
 			desktop.add(frame);
 			frame.setVisible(true);
-			frame.setTextAreaFocus(); // Set the input focus to the text field
-										// after drawing the panel
+			// Set the input focus to the text field after drawing the panel
+			frame.setTextAreaFocus(); 
 		}
 
 	} // end inner class NewAction
 
-	@SuppressWarnings("serial")
 	private class BotConfigurationAction extends AbstractAction {
 
 		// set up action's name, icon, descriptions and mnemonic
@@ -189,7 +183,6 @@ public class Main extends JFrame {
 
 	} // end inner class NewAction
 	
-	@SuppressWarnings("serial")
 	private class PredicatesAction extends AbstractAction {
 
 		// set up action's name, icon, descriptions and mnemonic
@@ -211,14 +204,14 @@ public class Main extends JFrame {
 
 	} // end inner class NewAction
 
-	@SuppressWarnings("serial")
 	private class HelpScreenAction extends AbstractAction {
 
 		// set up action's name, icon, descriptions and mnemonic
 		public HelpScreenAction() {
 			putValue(NAME, "Help");
-			// putValue(SMALL_ICON, new
-			// ImageIcon(getClass().getResource("images/New24.png")));
+			
+			putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/help.png"));
+			log.debug(MagicStrings.projectLocation + "img/list.png");
 			putValue(SHORT_DESCRIPTION, "Help");
 			putValue(LONG_DESCRIPTION, "How to load and use Bots");
 			putValue(MNEMONIC_KEY, new Integer('H'));
@@ -227,9 +220,9 @@ public class Main extends JFrame {
 		// display window in which user can input entry
 		public void actionPerformed(ActionEvent e) {
 			// create new internal window
-			// HelpFrame frame = new HelpFrame();
-			// desktop.add(frame);
-			// frame.setVisible(true);
+			 HelpFrame frame = new HelpFrame();
+			 desktop.add(frame);
+			 frame.setVisible(true);
 		}
 
 	} // end inner class NewAction

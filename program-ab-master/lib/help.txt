@@ -1,0 +1,3 @@
+AIML 2.0 based Chat Bot
+
+To start chatting click the chat icon in the top left corner.

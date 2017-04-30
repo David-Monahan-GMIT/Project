@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -106,9 +108,12 @@ public class PredicatesFrame extends JInternalFrame implements ActionListener {
 		mainPanel.setLayout(new GridLayout(predicates.size(), 2, 1, 5));
 		scrolly.setViewportView(mainPanel);
 		scrolly.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-		scrolly.getVerticalScrollBar().setUnitIncrement(16); // Speeds up the scroll speed. Default is very slow
-
-		for (String name : predicates.keySet()) {
+		// Speeds up the scroll speed. Default is very slow
+		scrolly.getVerticalScrollBar().setUnitIncrement(16);
+		// Create a sorted set with just the keys so as to display them
+		// alphabetically
+		SortedSet<String> keys = new TreeSet<String>(predicates.keySet());
+		for (String name : keys) {
 			createRow(name, predicates.get(name));
 		}
 		add(scrolly, BorderLayout.CENTER);
@@ -117,7 +122,7 @@ public class PredicatesFrame extends JInternalFrame implements ActionListener {
 
 	/**
 	 * Utility method to create a new row for each entry. Also adds each entry
-	 * to the fields Hashmap for easy access later.
+	 * to the fields Hashmap in order to match up keys with their textField.
 	 * 
 	 * @param name
 	 *            The name to be used for the lhs JLabel

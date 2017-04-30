@@ -98,7 +98,7 @@
 <template>Launching the camera.  <oob><camera>on</camera></oob></template>
 </category>
 <category><pattern>LAUNCH *</pattern>
-<template>I didn't find <star/> among your installed apps.  Let's try to find it. <think><set name="it"><star/></set></think>.  <oob><search><star/></search></oob></template>
+<template>Attempting to Launch: <star/><think><set name="it"><star/></set></think>.  <oob><search><star/></search></oob></template>
 </category>
 <category><pattern>LAUNCH * DOT COM</pattern>
 <template>Let's go to <star/>.com.  <oob><url>http://<star/>.com</url></oob></template>

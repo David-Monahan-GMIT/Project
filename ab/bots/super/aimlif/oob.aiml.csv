@@ -25,7 +25,7 @@
 0,DIRECTIONS *,*,*,Here are the directions.  <oob><directions><to><star/></to></directions></oob>,oob.aiml
 0,DIRECTIONS FROM * TO *,*,*,Here are the directions from <star/> to <star index="2"/>.  <oob><directions><from><star/></from><to><star index="2"/></to></directions></oob>,oob.aiml
 0,LAUNCH CAMERA,*,*,Launching the camera.  <oob><camera>on</camera></oob>,oob.aiml
-0,LAUNCH *,*,*,I didn't find <star/> among your installed apps.  Let's try to find it. <think><set name="it"><star/></set></think>.  <oob><search><star/></search></oob>,oob.aiml
+0,LAUNCH *,*,*,Attempting to Launch: <star/><think><set name="it"><star/></set></think>.  <oob><search><star/></search></oob>,oob.aiml
 0,LAUNCH * DOT COM,*,*,Let's go to <star/>.com.  <oob><url>http://<star/>.com</url></oob>,oob.aiml
 0,TACO,*,*,I'm looking for Mexican restaurants near you.  <oob><map>Tacos</map></oob>,oob.aiml
 0,PIZZA,*,*,I'm looking on the map for Pizza places near you.  <oob><map>Pizza</map></oob>,oob.aiml

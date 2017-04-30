@@ -110,7 +110,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 		// Removed due to redundancy adds an actionlistener to the textArea that
 		// triggers when the enter button is pressed
 		// inputTextField.addActionListener(this);
-		
+
 		sendButton.addActionListener(this);
 
 		setBounds(xOffset, yOffset, 700, 600);
@@ -138,15 +138,17 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	 * 
 	 */
 	public synchronized void actionPerformed(ActionEvent e) {
+		// Use the current user name. Defaults are specified by predicates
 		textArea.append(chatSession.predicates.get("name") + ": " + inputTextField.getText() + "\r\n");
-		textArea.append(chatSession.bot.properties.get("name") + ": " + chat(inputTextField.getText()) + "\r\n");
+		// Use the current Bot name. Defaults are specified by predicates
+		textArea.append(chatSession.predicates.get("customname") + ": " + chat(inputTextField.getText()) + "\r\n");
 		// Sets the carat position in the text area so that it also scrolls when
 		// new text is added
 		textArea.setCaretPosition(textArea.getText() != null ? textArea.getText().length() : 0);
-		inputTextField.setText("");
-		inputTextField.requestFocus(); // ensures the input focus snaps back to
-										// the textArea ie after an image is
-										// displayed
+		inputTextField.setText(""); // clear the input field
+		// ensures the input focus snaps back to the textArea ie after an image
+		// is displayed
+		inputTextField.requestFocus();
 	}
 
 	/**
@@ -160,8 +162,6 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 	private synchronized String chat(String query) {
 
 		String textLine = query;
-		// System.out.print("Human: ");
-		// textLine = IOUtils.readInputTextLine();
 		if (textLine == null || textLine.length() < 1)
 			textLine = MagicStrings.null_input;
 		if (textLine.equals("q"))
@@ -199,8 +199,8 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			response = response.replace("&gt;", ">");
 		if (response.contains("<oob>")) {
 			log.debug("OOB Handler call using: " + response.split(MagicStrings.oobRegex)[1]);
-			new OutOfBoundsHandler(response.split(MagicStrings.oobRegex)[1]);
-			return response.split(MagicStrings.oobRegex)[0];
+			OutOfBandHandler handle = new OutOfBandHandler(response.split(MagicStrings.oobRegex)[1], log);
+			return response.split(MagicStrings.oobRegex)[0] + handle.getResponse();
 		}
 		if (response.contains("<a href=")) {
 			try {
@@ -236,11 +236,6 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			}
 
 			return (response.substring(0, response.indexOf("<img src=\"")));
-		}
-		// Utility to pick up on a name change
-		if (response.contains("OK, from now on you can call me")) {
-			bot.properties.set("name", ((response.substring(response.lastIndexOf(" "))).replace(".", "")).trim());
-			log.debug(bot.properties.get("name"));
 		}
 		return response;
 	}
