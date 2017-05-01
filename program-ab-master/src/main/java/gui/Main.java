@@ -116,7 +116,7 @@ public class Main extends JFrame {
 		Dimension dimension = toolkit.getScreenSize();
 
 		// center window on screen
-		setBounds(100, 10, dimension.width - 200, dimension.height - 100);
+		setBounds(50, 10, dimension.width - 100, dimension.height - 100);
 
 		setVisible(true);
 
@@ -258,11 +258,6 @@ public class Main extends JFrame {
 	 *
 	 */
 	private class ExitAction extends AbstractAction {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
 
 		public ExitAction() {
 			putValue(NAME, "Exit");
