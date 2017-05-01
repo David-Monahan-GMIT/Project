@@ -73,6 +73,7 @@ public class MagicStrings {
 	public static String schedule_error = "I'm unable to schedule that event.";
 	public static String system_failed = "Failed to execute system command.";
 	public static String unknown_predicate_value = "unknown";
+	public static String unknown_path_value = "unknown";
 	public static String unknown_property_value = "unknown";
 	public static String unknown_map_value = "unknown";
 	public static String unknown_customer_id = "unknown";
@@ -93,7 +94,7 @@ public class MagicStrings {
 	public static String map_successor = "successor";
 	public static String map_predecessor = "predecessor";
 	// paths
-	public static String botName = "super";
+	public static String botName = "superbotv3";
 	public static String root_path = "c:/ab";
 	public static String bot_path = root_path + "/bots";
 	public static String bot_name_path = bot_path + botName;

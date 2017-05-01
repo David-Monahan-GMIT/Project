@@ -1,3 +1,33 @@
-AIML 2.0 based Chat Bot
+<!DOCTYPE html>
+<html>
+<body>
 
-To start chatting click the chat icon in the top left corner.
+<b>David Monahans Program AB, S.U.P.E.R and AIML 2.0 based Chat Bot</b>
+
+<p><b>Chat:</b> The main window for this application. This allows you to chat with your chosen Bot. This program is a fork of Program-AB and configured to use the S.U.P.E.R Aiml Chat Bot. 
+</p><p style="margin-left: +10px;" ><b>Features:</b><br>
+<b>Pannous API:</b> Lets you perform web searches, check the weather, use google translate and many other features.<br>
+<b>Usage Examples:</b> Who is Bono? Translate It is a very nice day today German, Weather Galway.</p><p style="margin-left: +10px;" >
+<b>Instructed Learning:</b> Lets you instruct the bot in new responses and interactions by correcting it's responses or telling it to learn some new information.<br>
+<b>Usage Examples:</b> Learn The sun is hot, Learn Galway is a city. (In response to a bad answer) wrong, what should I say instead?, The sun is hot</p><p style="margin-left: +10px;" >
+<b>Predicated Learning:</b> Uses a set of variables called predicates to remember information during the conversation. e.g. name, age, location etc.<br>
+<b>Usage Examples:</b> My name is Dave, your name is HAL, I live in Galway, I am 29 years old.</p><p style="margin-left: +10px;" >
+<b>Out Of Band:</b> When asked to Launch an application or external program the Bot can check your list of paths and see if you have the relevant program to be launched.<br>
+<b>Usage Examples:</b> Open notepad, google GMIT, launch music</p><p style="margin-left: +10px;" >
+<b>Smart Chat Features:</b> Some chat strings have pre-programmed responses based on what the User would expect. e.g doing maths, telling the time and date etc.<br>
+<b>Usage Examples:</b> add 5 + 5, what is the square root of 8649, time, date
+</p><p>
+<b>Bot-Configuration:</b> This lets you select the current bot to use. The bot must be located in the specified folder and conform to the S.U.P.E.R Aiml2.0 folder structure. This window also lets you reconfigure the Bots properties if you so desire.
+</p><p>
+<b>Predicates:</b> This lets you set the default Predicates for your selected Bot. 
+Predicates are variables the Bot uses to store information about itself and the user during the conversation. Values which are set here can be overwritten during the conversation if you tell the Bot different information. This window is provided as a utility to configure your desired starting information.
+</p><p>
+<b>Paths:</b> This lets your set the paths to programs you want the bot to use in order to execute certain actions. 
+This lets you set the programs to launch when you ask the program to give you a notepad, music or do a web search.
+</p><p>
+<b>Help:</b> This window.
+</p><p>
+<b>Exit:</b> Closes all windows and the main Desktop window.
+</p>
+</body>
+</html>

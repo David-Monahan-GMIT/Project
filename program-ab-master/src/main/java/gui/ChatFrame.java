@@ -197,6 +197,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			response = response.replace("&lt;", "<");
 		while (response.contains("&gt;"))
 			response = response.replace("&gt;", ">");
+		response = response.toLowerCase();
 		if (response.contains("<oob>")) {
 			log.debug("OOB Handler call using: " + response.split(MagicStrings.oobRegex)[1]);
 			OutOfBandHandler handle = new OutOfBandHandler(response.split(MagicStrings.oobRegex)[1], log);
@@ -206,6 +207,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			try {
 				String url = response.split(MagicStrings.imageRegex)[1];
 				url = url.replaceAll("\"\\><.*", "");
+				log.debug(url);
 				BufferedImage img = ImageIO.read(new URL(url));
 				JLabel label = new JLabel(new ImageIcon(img));
 				JInternalFrame f = new JInternalFrame("Image", false, true);
@@ -223,6 +225,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			try {
 				String url = response.substring(response.indexOf("<img src=\""), (response.length() - 3));
 				url = url.replace("<img src=\"", "");
+				log.debug(url);
 				BufferedImage img = ImageIO.read(new URL(url));
 				JLabel label = new JLabel(new ImageIcon(img));
 				JInternalFrame f = new JInternalFrame("Image", false, true);

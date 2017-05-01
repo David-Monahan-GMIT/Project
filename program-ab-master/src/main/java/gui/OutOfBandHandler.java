@@ -16,19 +16,22 @@ import org.slf4j.Logger;
 public class OutOfBandHandler {
 
 	private Logger log;
-	private HashMap<String, String> paths = new HashMap<String, String>();
+//	private HashMap<String, String> paths = new HashMap<String, String>();
 	private String response;
 	private String[] args;
 	private String command;
+	private Paths paths = new Paths();
 
 	public OutOfBandHandler(String handle, Logger log) {
 		this.log = log;
 		response = "";
+		
+		paths.getPathDefaults(MagicStrings.config_path + "/paths.txt");
 
 		// Initialise paths to programs on the pc
-		paths.put("notepad", "C:\\Program Files (x86)\\Notepad++\\notepad++.exe");
-		paths.put("browser", "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
-		paths.put("music", "C:\\Program Files (x86)\\iTunes\\iTunes.exe");
+	//	paths.put("NOTEPAD", "C:\\Program Files (x86)\\Notepad++\\notepad++.exe");
+	//	paths.put("BROWSER", "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
+	//	paths.put("MUSIC", "C:\\Program Files (x86)\\iTunes\\iTunes.exe");
 
 		// Use a regex to pull out the command in the tags
 		command = handle.split(MagicStrings.commandRegex)[2];
@@ -38,7 +41,6 @@ public class OutOfBandHandler {
 			handle = handle.replace("<search>", "");
 			handle = handle.replace("</search>", "");
 			handle = handle.replace("</oob>", "");
-			handle = handle.toLowerCase();
 			log.debug(handle);
 
 			args = handle.split(" ");

@@ -49,7 +49,7 @@ public class Main extends JFrame {
 	private static final Logger log = LoggerFactory.getLogger(Main.class);
 
 	private JDesktopPane desktop;
-	Action newChatSession, botConfigurationAction, exitAction, predicatesAction, helpScreenAction;
+	Action newChatSession, botConfigurationAction, exitAction, predicatesAction, helpScreenAction, pathsAction;
 
 	public Main() {
 		super("Chat Bot panel");
@@ -77,13 +77,16 @@ public class Main extends JFrame {
 		newChatSession = new NewChatSession();
 		botConfigurationAction = new BotConfigurationAction();
 		predicatesAction = new PredicatesAction();
+		pathsAction = new PathsAction();
 		helpScreenAction = new HelpScreenAction();
 		exitAction = new ExitAction();
 
 		toolBar.add(newChatSession);
 		toolBar.add(botConfigurationAction);
 		toolBar.add(predicatesAction);
+		toolBar.add(pathsAction);
 		toolBar.add(helpScreenAction);
+		toolBar.add(exitAction);
 		toolBar.setFloatable(false);
 
 
@@ -204,6 +207,27 @@ public class Main extends JFrame {
 
 	} // end inner class NewAction
 
+	private class PathsAction extends AbstractAction {
+
+		// set up action's name, icon, descriptions and mnemonic
+		public PathsAction() {
+			putValue(NAME, "Paths");
+			putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/paths.png"));
+			log.debug(MagicStrings.projectLocation + "img/paths.png");
+			putValue(SHORT_DESCRIPTION, "Paths");
+			putValue(LONG_DESCRIPTION, "Change the Path settings for the current Bot");
+			putValue(MNEMONIC_KEY, new Integer('P'));
+		}
+
+		// display window in which user can input entry
+		public void actionPerformed(ActionEvent e) {
+			PathsFrame frame = new PathsFrame(log);
+			desktop.add(frame);
+			frame.setVisible(true);
+		}
+
+	} // end inner class NewAction
+	
 	private class HelpScreenAction extends AbstractAction {
 
 		// set up action's name, icon, descriptions and mnemonic
@@ -211,7 +235,7 @@ public class Main extends JFrame {
 			putValue(NAME, "Help");
 			
 			putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/help.png"));
-			log.debug(MagicStrings.projectLocation + "img/list.png");
+			log.debug(MagicStrings.projectLocation + "img/help.png");
 			putValue(SHORT_DESCRIPTION, "Help");
 			putValue(LONG_DESCRIPTION, "How to load and use Bots");
 			putValue(MNEMONIC_KEY, new Integer('H'));
@@ -243,6 +267,8 @@ public class Main extends JFrame {
 		public ExitAction() {
 			putValue(NAME, "Exit");
 			putValue(SHORT_DESCRIPTION, "Exit");
+			putValue(SMALL_ICON, new ImageIcon(MagicStrings.projectLocation + "img/exit.png"));
+			log.debug(MagicStrings.projectLocation + "img/exit.png");
 			putValue(LONG_DESCRIPTION, "Terminate the program");
 			putValue(MNEMONIC_KEY, new Integer('x'));
 		}

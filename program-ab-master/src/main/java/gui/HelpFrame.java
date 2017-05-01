@@ -17,7 +17,9 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class HelpFrame extends JInternalFrame implements ActionListener {
 	private static final String HELP_PATH = "lib/help.txt";
-	private JPanel mainPanel;
+//	private JTextArea info;
+	private JTextPane pane;
+	private StringBuilder text = new StringBuilder();
 
 	// static integers used to determine new window positions
 	// for cascading windows
@@ -25,20 +27,24 @@ public class HelpFrame extends JInternalFrame implements ActionListener {
 
 	public HelpFrame() {
 		super("Help", false, true);
-		// Set the rows and columns for GridLayout
-		int rowCount = 1;
-		int colCount = 1;
 
-		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(rowCount, colCount, 5, 5));
-		JTextArea display = new JTextArea();
+/*		info = new JTextArea();
+		info.setFont(new Font("Serif", Font.PLAIN, 14));
+		info.setWrapStyleWord(true);
+		info.setLineWrap(true);
+		info.setEditable(false);
+		info.setOpaque(false);
+		info.setFocusable(false);
+		info.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));*/
+		pane = new JTextPane();
+		pane.setContentType("text/html");
 		
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(HELP_PATH));
 			String line = "";
 			while((line = br.readLine()) != null){
-				display.append(line + "\n");
+				text.append(line + "\n");
 			}
 			br.close();
 			
@@ -48,16 +54,14 @@ public class HelpFrame extends JInternalFrame implements ActionListener {
 			e.printStackTrace();
 		}
 		
-		
-		mainPanel.add(display);
-		
-		Container container = getContentPane();
-		container.add(mainPanel, BorderLayout.WEST);
-		
-
+		pane.setText(text.toString());
+		JScrollPane scrolly = new JScrollPane();
+		scrolly.setViewportView(pane);
+		add(scrolly, BorderLayout.CENTER);
+		// Makes sure it displays from the start
+		pane.setCaretPosition(0);
 		setBounds(xOffset, yOffset, 470, 540);
-		xOffset = (xOffset + 30) % 470;
-		yOffset = (yOffset + 30) % 540;
+
 	}
 	@Override
 	/**
