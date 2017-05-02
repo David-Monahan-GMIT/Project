@@ -12,25 +12,29 @@ import java.io.IOException;
 import org.alicebot.ab.MagicStrings;
 import org.slf4j.Logger;
 
+/**
+ * This class is a simple handler to parse responses which contain an \<oob\> tag.
+ * The Bot returns an xml response for Out of Band calls and this handler is
+ * designed to parse those commands and use a text file listing paths to various
+ * programs on the current machine in order to try and handle those requests.
+ * 
+ * New paths can be added by editing the paths.txt file located in the
+ *\<botname\>/config/ folder
+ * 
+ * @author Dave
+ *
+ */
 public class OutOfBandHandler {
 
-	private Logger log;
-//	private HashMap<String, String> paths = new HashMap<String, String>();
 	private String response;
 	private String[] args;
 	private String command;
 	private Paths paths = new Paths();
 
 	public OutOfBandHandler(String handle, Logger log) {
-		this.log = log;
 		response = "";
-		
-		paths.getPathDefaults(MagicStrings.config_path + "/paths.txt");
 
-		// Initialise paths to programs on the pc
-	//	paths.put("NOTEPAD", "C:\\Program Files (x86)\\Notepad++\\notepad++.exe");
-	//	paths.put("BROWSER", "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
-	//	paths.put("MUSIC", "C:\\Program Files (x86)\\iTunes\\iTunes.exe");
+		paths.getPathDefaults(MagicStrings.config_path + "/paths.txt");
 
 		// Use a regex to pull out the command in the tags
 		command = handle.split(MagicStrings.commandRegex)[2];

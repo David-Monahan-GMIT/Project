@@ -21,7 +21,18 @@ import org.alicebot.ab.MagicBooleans;
 import org.alicebot.ab.MagicStrings;
 import org.slf4j.Logger;
 
-@SuppressWarnings("serial")
+
+/**
+ * The Chat Frame is the primary interface frame for interacting with the bot.
+ * All inputs and outputs are displayed in the large text area. The text area
+ * scrolls automatically with new text. The enter button is tied to the send
+ * button via an actionListener to simplify interaction. A response parser
+ * checks the responses from the Bot for image links or Out-of-Band calls and
+ * will create Image panels or OutOfBandHandlers as appropriate.
+ * 
+ * @author Dave
+ *
+ */
 public class ChatFrame extends JInternalFrame implements ActionListener {
 
 	// static integers used to determine new window positions

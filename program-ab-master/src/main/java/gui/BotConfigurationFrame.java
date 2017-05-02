@@ -25,6 +25,18 @@ import org.alicebot.ab.MagicStrings;
 import org.alicebot.ab.Properties;
 import org.slf4j.Logger;
 
+/**
+ * A simple Frame to show configuration information for the Bot to be loaded.
+ * The Bot to be loaded is specified in a text field by the user. The default
+ * bot is already displayed. Upon loading the properties file of the bot is
+ * loaded and it's fields are displayed. The user can modify these if he/she
+ * wishes but they are not essential to the workings of the bot. Loading of the
+ * properties file is merely to ensure that a bot with the correct directory
+ * layout is being loaded.
+ * 
+ * @author Dave
+ *
+ */
 public class BotConfigurationFrame extends JInternalFrame implements ActionListener {
 	// static integers used to determine new window positions
 	// for cascading windows
@@ -39,11 +51,18 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 	private Properties bot = new Properties();
 	private HashMap<String, JTextField> fields = new HashMap<String, JTextField>();
 
+	/**
+	 * Creates a new Frame for selecting the S.U.P.E.R AIML compliant bot to
+	 * use. The bot must be contained in the specified folder
+	 * 
+	 * @param log
+	 *            The main logger
+	 */
 	public BotConfigurationFrame(Logger log) {
 		// Give the frame a name
 		super("Bot Configuration", false, true);
 		this.log = log;
-		
+
 		mainBox = Box.createVerticalBox();
 		add(mainBox, BorderLayout.NORTH);
 
@@ -103,7 +122,7 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 	 */
 	public void actionPerformed(ActionEvent e) {
 
-		// Load the data based on the selected bot. 
+		// Load the data based on the selected bot.
 		if (e.getSource() == loadButton) {
 			if (inputTextField.getText() != null && inputTextField.getText() != "") {
 				MagicStrings.botName = inputTextField.getText();
@@ -113,7 +132,7 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 			log.debug(MagicStrings.config_path + "/properties.txt");
 			drawGui();
 		}
-		
+
 		// Save the current data fields and close the window
 		if (e.getSource() == saveButton) {
 			for (String key : fields.keySet()) {
@@ -122,14 +141,13 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 			bot.setProperties(MagicStrings.config_path + "/properties.txt");
 			this.dispose();
 		}
-		
+
 		// Close the window without saving
 		if (e.getSource() == exitButton) {
 			this.dispose();
 		}
 
 	}
-
 
 	/**
 	 * Creates the GUI. Checks the size of the Hashmap to see how many rows need
@@ -138,8 +156,7 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 	 * to be displayed easily.
 	 */
 	private void drawGui() {
-		
-		
+
 		int rowCount = bot.size();
 		JScrollPane scrolly = new JScrollPane();
 		JPanel dataPanel = new JPanel();
@@ -151,11 +168,11 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 		dataPanel.add(rightPanel, BorderLayout.EAST);
 		scrolly.setViewportView(dataPanel);
 		scrolly.setBorder(BorderFactory.createSoftBevelBorder(BevelBorder.RAISED, Color.BLUE, Color.BLACK));
-		
-		for(String name: bot.keySet()) {
+
+		for (String name : bot.keySet()) {
 			createRow(name, bot.get(name));
 		}
-		
+
 		// clear the window and redraw
 		getContentPane().removeAll();
 		add(mainBox, BorderLayout.NORTH);
@@ -164,7 +181,7 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 		revalidate();
 		repaint();
 	}
-	
+
 	private void createRow(String name, String value) {
 		JLabel label = new JLabel(name, SwingConstants.RIGHT);
 		label.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -174,7 +191,7 @@ public class BotConfigurationFrame extends JInternalFrame implements ActionListe
 		field.setText(value);
 		rightPanel.add(field);
 
-		fields.put(name, field);		
+		fields.put(name, field);
 	}
 
 }

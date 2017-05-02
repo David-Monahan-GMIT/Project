@@ -12,7 +12,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.*;
 
-@SuppressWarnings("serial")
+
+/**
+ * A simple frame for displaying a HTML formatted text file with short
+ * descriptions of each button and some example features of the Chat Bot.
+ * 
+ * @author Dave
+ *
+ */
 public class HelpFrame extends JInternalFrame {
 	private static final String HELP_PATH = "lib/help.txt";
 	private JTextPane pane;

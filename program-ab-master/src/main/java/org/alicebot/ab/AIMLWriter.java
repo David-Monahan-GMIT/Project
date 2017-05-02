@@ -24,6 +24,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Helper class to write some custom AIML
+ * 
+ * Unused tester class
  */
 public class AIMLWriter {
 	private static final Logger log = LoggerFactory.getLogger(AIMLWriter.class);

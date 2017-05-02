@@ -22,7 +22,16 @@ import org.alicebot.ab.Bot;
 import org.alicebot.ab.MagicStrings;
 import org.slf4j.Logger;
 
-@SuppressWarnings("serial")
+
+/**
+ * Utility frame to allow the user to change the paths associated with the
+ * current Bot and set them to values relevant for their PC. New paths can be
+ * added manually by editing the paths.txt file in the Bot's <botname>/config
+ * folder. 
+ * 
+ * @author Dave
+ *
+ */
 public class PathsFrame extends JInternalFrame implements ActionListener {
 	// static integers used to determine new window positions
 	// for cascading windows
@@ -35,10 +44,10 @@ public class PathsFrame extends JInternalFrame implements ActionListener {
 	private HashMap<String, JTextField> fields = new HashMap<String, JTextField>();
 
 	/**
-	 * Create a new window which displays the contents of the Paths file
-	 * within the chat bot hierarchy. This allows the user to customise the
-	 * default paths used by the bot during chat operations. These are used 
-	 * by the bot to be able to launch applications.
+	 * Create a new window which displays the contents of the Paths file within
+	 * the chat bot hierarchy. This allows the user to customise the default
+	 * paths used by the bot during chat operations. These are used by the bot
+	 * to be able to launch applications.
 	 * 
 	 * @param log
 	 *            The main logger
@@ -128,7 +137,7 @@ public class PathsFrame extends JInternalFrame implements ActionListener {
 	 *            The default value to be displayed in the JTextField
 	 */
 	private void createRow(String name, String value) {
-		
+
 		JLabel label = new JLabel(name, SwingConstants.LEFT);
 		label.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		mainPanel.add(label);
@@ -136,8 +145,6 @@ public class PathsFrame extends JInternalFrame implements ActionListener {
 		JTextField field = new JTextField(value, 5);
 		mainPanel.add(field);
 
-
 		fields.put(name, field);
 	}
 }
-

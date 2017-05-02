@@ -23,7 +23,19 @@ import org.alicebot.ab.MagicStrings;
 import org.alicebot.ab.Predicates;
 import org.slf4j.Logger;
 
-@SuppressWarnings("serial")
+
+/**
+ * This displays all of the Predicates that the current Bot uses for learning
+ * and allows the user to configure default values. This is provided as a
+ * utility to create a desired default state for the Bot. Predicates are
+ * modified by the Bot during conversation but are volatile, ie they are not
+ * saved between sessions. Predicates are used by the Bot to try and learn
+ * persona based information and since this is unique to each user this is never
+ * saved.
+ *  
+ * @author Dave
+ *
+ */
 public class PredicatesFrame extends JInternalFrame implements ActionListener {
 	// static integers used to determine new window positions
 	// for cascading windows
