@@ -9,7 +9,6 @@ package gui;
  */
 
 import java.io.IOException;
-import java.util.HashMap;
 import org.alicebot.ab.MagicStrings;
 import org.slf4j.Logger;
 

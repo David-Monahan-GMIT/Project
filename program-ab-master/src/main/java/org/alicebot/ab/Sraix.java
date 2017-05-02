@@ -1,7 +1,4 @@
 package org.alicebot.ab;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 /* Program AB Reference AIML 2.0 implementation
         Copyright (C) 2013 ALICE A.I. Foundation
         Contact: info@alicebot.org
@@ -108,8 +105,8 @@ public class Sraix {
             int offset = CalendarUtils.timeZoneOffset();
             //log.info("OFFSET = "+offset);
             String locationString = "";
-            if (chatSession.locationKnown) {
-                locationString = "&location="+chatSession.latitude+","+chatSession.longitude;
+            if (Chat.locationKnown) {
+                locationString = "&location="+Chat.latitude+","+Chat.longitude;
             }
             // 
             //"https://weannie.pannous.com/api?input=when+is+daylight+savings+time+in+the+us&locale=en_US&login=pandorabots&ip=169.254.178.212&botid=0&key=CKNgaaVLvNcLhDupiJ1R8vtPzHzWc8mhIQDFSYWj&exclude=Dialogues,ChatBot&out=json";

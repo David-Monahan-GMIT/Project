@@ -9,46 +9,19 @@ package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Collections;
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.TreeMap;
-
-import javax.swing.UIManager.LookAndFeelInfo;
-
-import org.alicebot.ab.AB;
-import org.alicebot.ab.AIMLProcessor;
 import org.alicebot.ab.Bot;
-import org.alicebot.ab.Category;
 import org.alicebot.ab.Chat;
-import org.alicebot.ab.Graphmaster;
 import org.alicebot.ab.MagicBooleans;
 import org.alicebot.ab.MagicStrings;
-import org.alicebot.ab.PCAIMLProcessorExtension;
-import org.alicebot.ab.Timer;
-import org.alicebot.ab.utils.IOUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("serial")
 public class ChatFrame extends JInternalFrame implements ActionListener {
 
 	// static integers used to determine new window positions
@@ -113,7 +86,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 
 		sendButton.addActionListener(this);
 
-		setBounds(xOffset, yOffset, 700, 600);
+		setBounds(xOffset, yOffset, 600, 600);
 		// xOffset = (xOffset + 30) % 500;
 		// yOffset = (yOffset + 30) % 500;
 
@@ -166,6 +139,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			textLine = MagicStrings.null_input;
 		if (textLine.equals("q"))
 			System.exit(0);
+		// Used for experimental aiml generator
 		else if (textLine.equals("wq")) {
 			bot.writeQuit();
 			System.exit(0);
@@ -197,8 +171,8 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 			response = response.replace("&lt;", "<");
 		while (response.contains("&gt;"))
 			response = response.replace("&gt;", ">");
-		response = response.toLowerCase();
 		if (response.contains("<oob>")) {
+			response = response.toLowerCase();
 			log.debug("OOB Handler call using: " + response.split(MagicStrings.oobRegex)[1]);
 			OutOfBandHandler handle = new OutOfBandHandler(response.split(MagicStrings.oobRegex)[1], log);
 			return response.split(MagicStrings.oobRegex)[0] + handle.getResponse();
@@ -213,7 +187,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 				JInternalFrame f = new JInternalFrame("Image", false, true);
 				f.getContentPane().add(label);
 				f.pack();
-				f.setLocation(710, yOffset + 10);
+				f.setLocation(610, yOffset + 10);
 				desktop.add(f);
 				f.setVisible(true);
 			} catch (IOException ex) {
@@ -231,7 +205,7 @@ public class ChatFrame extends JInternalFrame implements ActionListener {
 				JInternalFrame f = new JInternalFrame("Image", false, true);
 				f.getContentPane().add(label);
 				f.pack();
-				f.setLocation(710, yOffset + 10);
+				f.setLocation(610, yOffset + 10);
 				desktop.add(f);
 				f.setVisible(true);
 			} catch (IOException ex) {

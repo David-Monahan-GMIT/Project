@@ -2,13 +2,11 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -21,10 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-
 import org.alicebot.ab.Bot;
 import org.alicebot.ab.MagicStrings;
 import org.alicebot.ab.Properties;

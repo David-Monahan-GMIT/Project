@@ -106,6 +106,7 @@ public class Main extends JFrame {
 		// does not select Exit from File menu to terminate
 		// application
 		addWindowListener(new WindowAdapter() {
+			@Override
 			public void windowClosing(WindowEvent event) {
 				shutDown();
 			}
@@ -155,6 +156,7 @@ public class Main extends JFrame {
 		}
 
 		// display window in which user can input entry
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			ChatFrame frame = new ChatFrame(MagicStrings.botName, MagicBooleans.trace_mode, "chat", desktop, log);
 			desktop.add(frame);
@@ -178,6 +180,7 @@ public class Main extends JFrame {
 		}
 
 		// display window in which user can input entry
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			BotConfigurationFrame frame = new BotConfigurationFrame(log);
 			desktop.add(frame);
@@ -199,6 +202,7 @@ public class Main extends JFrame {
 		}
 
 		// display window in which user can input entry
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			PredicatesFrame frame = new PredicatesFrame(log);
 			desktop.add(frame);
@@ -220,6 +224,7 @@ public class Main extends JFrame {
 		}
 
 		// display window in which user can input entry
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			PathsFrame frame = new PathsFrame(log);
 			desktop.add(frame);
@@ -242,6 +247,7 @@ public class Main extends JFrame {
 		}
 
 		// display window in which user can input entry
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			// create new internal window
 			 HelpFrame frame = new HelpFrame();
@@ -269,6 +275,7 @@ public class Main extends JFrame {
 		}
 
 		// terminate program
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			shutDown(); // close database connection and terminate
 		}
