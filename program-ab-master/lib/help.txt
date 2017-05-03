@@ -7,7 +7,7 @@
 <p><b>Chat:</b> The main window for this application. This allows you to chat with your chosen Bot. This program is a fork of Program-AB and configured to use the S.U.P.E.R Aiml Chat Bot. 
 </p><p style="margin-left: +10px;" ><b>Features:</b><br>
 <b>Pannous API:</b> Lets you perform web searches, check the weather, use google translate and many other features.<br>
-<b>Usage Examples:</b> Who is Bono? Translate It is a very nice day today German, Weather Galway.</p><p style="margin-left: +10px;" >
+<b>Usage Examples:</b> Who is Bono? Translate Goodbye in German, Weather Galway.</p><p style="margin-left: +10px;" >
 <b>Instructed Learning:</b> Lets you instruct the bot in new responses and interactions by correcting it's responses or telling it to learn some new information.<br>
 <b>Usage Examples:</b> Learn The sun is hot, Learn Galway is a city. (In response to a bad answer) wrong, what should I say instead?, The sun is hot</p><p style="margin-left: +10px;" >
 <b>Predicated Learning:</b> Uses a set of variables called predicates to remember information during the conversation. e.g. name, age, location etc.<br>
